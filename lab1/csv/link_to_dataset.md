@@ -11,3 +11,5 @@ Links to Kaggle dataset for Lab #1 can be found as follows.
 CSV in zip (https://www.kaggle.com/rounakbanik/the-movies-dataset/download)
 
 Note: CSV files will be stored in lab/csv folder. However, the CSV files will not be synced to gitlab repo.
+
+end
