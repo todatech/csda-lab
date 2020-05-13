@@ -5,3 +5,8 @@ Here, we will share what we've found on the net that worth everyone's attention.
 ## Learn GIT with Bitbucket Cloud
 [Learn Git with Bitbucket Cloud - Atlassian Bitbucket](https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud)
 
+## Miscellenous Notes
+### To install nltk in your anaconda environment
+$ conda activate base
+$ conda install -c anaconda nltk
+$ conda install -c conda-forge scikit-surprise
