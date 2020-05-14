@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  csdalab:
+    image: csdalab
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8050:8050

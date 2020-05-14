@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  csdalab:
+    image: csdalab
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: /bin/bash
+    # command: -c "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:8050 app.py"
+    command: -c "python debuggpy --wait-for-client --listen 0.0.0.0:5678 app.py"
+    ports:
+      - 5678:5678
+
