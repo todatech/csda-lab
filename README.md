@@ -112,3 +112,9 @@ https://towardsdatascience.com/how-to-build-a-complex-reporting-dashboard-using-
 
 Deploying Dash App - plotly|Dash
 https://dash.plotly.com/deployment
+
+Create a Multipage Dash Application
+https://towardsdatascience.com/create-a-multipage-dash-application-eceac464de91
+
+How to Build a Reporting Dashboard using Dash and Plotly
+https://towardsdatascience.com/how-to-build-a-complex-reporting-dashboard-using-dash-and-plotl-4f4257c18a7f

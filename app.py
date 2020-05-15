@@ -1,43 +1,65 @@
+# Data
+import pandas as pd
+import pickle
+
+# Graphing
+import plotly.graph_objects as go
+
+# Dash
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_bootstrap_components as dbc
+from dash.dependencies import Output, Input
 
-app = dash.Dash()
-colors = {
-    'background': '#111111',
-    'text': '#7FDBFF'
-}
-app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
-    html.H1(
-        children='First Entry',
-        style={
-            'textAlign': 'center',
-            'color': colors['text']
-        }
-    ),
-    html.Div(children='Dockerize App Entry Page', style={
-        'textAlign': 'center',
-        'color': colors['text']
-    }),
-    dcc.Graph(
-        id='Graph1',
+# Navbar
+from navbar import Navbar
+df = pd.read_csv('https://gist.githubusercontent.com/joelsewhere/f75da35d9e0c7ed71e5a93c10c52358d/raw/d8534e2f25495cc1de3cd604f952e8cbc0cc3d96/population_il_cities.csv')
+df.set_index(df.iloc[:, 0], drop=True, inplace=True)
+df = df.iloc[:, 1:]
+
+nav = Navbar()
+
+header = html.H3(
+    'Select the name of an Illinois city to see its population!'
+)
+
+options = [{'label': x.replace(', Illinois', ''), 'value': x}
+           for x in df.columns]
+
+dropdown = html.Div(dcc.Dropdown(
+    id='pop_dropdown',
+    options=options,
+    value='Abingdon city, Illinois'
+))
+
+output = html.Div(id='output',
+                  children=[],
+                  )
+
+
+def App():
+    layout = html.Div([
+        nav,
+        header,
+        dropdown,
+        output
+    ])
+    return layout
+
+
+def build_graph(city):
+    data = [go.Scatter(x=df.index,
+                       y=df[city],
+                       marker={'color': 'orange'})]
+    graph = dcc.Graph(
         figure={
-            'data': [
-                {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
-                {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
-            ],
-            'layout': {
-                'plot_bgcolor': colors['background'],
-                'paper_bgcolor': colors['background'],
-                'font': {
-                    'color': colors['text']
-                }
-            }
+            'data': data,
+            'layout': go.Layout(
+                title='{} Population Change'.format(city),
+                yaxis={'title': 'Population'},
+                hovermode='closest'
+            )
         }
     )
-])
-
-if __name__ == '__main__':
-    # app.run_server(debug=True)
-    # app.run_server(host='0.0.0.0',debug=True, port=8050)
-    app.run_server(host='0.0.0.0', port=8050)
+    return graph
