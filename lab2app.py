@@ -1,15 +1,20 @@
 import dash
 import dash_core_components as dcc
+import dash_bootstrap_components as dbc
 import dash_html_components as html
 
-app = dash.Dash()
+from comp.navbar import Navbar
+
+nav = Navbar()
+
 colors = {
     'background': '#111111',
     'text': '#7FDBFF'
 }
-app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[
+
+body = html.Div(style={'backgroundColor': colors['background']}, children=[
     html.H1(
-        children='Lab 1 Dash',
+        children='Lab 2 Page',
         style={
             'textAlign': 'center',
             'color': colors['text']
@@ -23,8 +28,10 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
         id='Graph1',
         figure={
             'data': [
-                {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
-                {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
+                {'x': [1, 2, 3], 'y': [4, 1, 2],
+                 'type': 'bar', 'name': 'SF'},
+                {'x': [1, 2, 3], 'y': [2, 4, 5],
+                 'type': 'bar', 'name': u'Montréal'},
             ],
             'layout': {
                 'plot_bgcolor': colors['background'],
@@ -37,7 +44,17 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     )
 ])
 
-if __name__ == '__main__':
-    # app.run_server(debug=True)
-    # app.run_server(host='0.0.0.0',debug=True, port=8050)
-    app.run_server(host='0.0.0.0', port=8050)
+
+def App():
+    layout = html.Div([
+        nav,
+        body
+    ])
+    return layout
+
+
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.UNITED])
+app.layout = App()
+
+if __name__ == "__main__":
+    app.run_server()

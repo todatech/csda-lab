@@ -1,3 +1,10 @@
 {
-    "python.pythonPath": "env/bin/python"
+    "python.pythonPath": "./env/bin/python",
+    "python.autoComplete.extraPaths": ["./lab1", "./lab2"],
+    "python.linting.pep8Enabled": true,
+    "python.linting.pylintPath": "./env/bin/pylint",
+    "python.linting.pylintArgs": ["--load-plugins", "pylint_django"],
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true
 }

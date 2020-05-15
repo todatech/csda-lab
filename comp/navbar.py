@@ -1,5 +1,6 @@
 import dash_bootstrap_components as dbc
 
+
 def Navbar():
     navbar = dbc.NavbarSimple(
         children=[
@@ -7,12 +8,14 @@ def Navbar():
             dbc.DropdownMenu(
                 nav=True,
                 in_navbar=True,
-                label="Menu",
+                label="Labs",
                 children=[
-                    dbc.DropdownMenuItem("Entry 1"),
-                    dbc.DropdownMenuItem("Entry 2"),
-                    dbc.DropdownMenuItem(divider=True),
-                    dbc.DropdownMenuItem("Entry 3"),
+                    dbc.DropdownMenuItem("Lab 1 - Recommender System",
+                            href="/lab1"),
+                    dbc.DropdownMenuItem("Lab 2 - blah",
+                            href="/lab2"),
+                    dbc.DropdownMenuItem("Lab 3 - blash",
+                            href="/lab3"),
                 ],
             ),
         ],
