@@ -73,6 +73,7 @@ pandocfilters==1.4.2
 parso==0.7.0
 pexpect==4.8.0
 pickleshare==0.7.5
+Pillow==7.1.2
 plotly==4.7.0
 prometheus-client==0.7.1
 prompt-toolkit==3.0.5
@@ -121,5 +122,6 @@ wcwidth==0.1.9
 webencodings==0.5.1
 Werkzeug==1.0.1
 widgetsnbextension==3.5.1
+wordcloud==1.7.0
 wrapt==1.12.1
 zipp==3.1.0
