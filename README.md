@@ -41,15 +41,23 @@ You will be able to start creating Juypter Notebook in VSCode environment, as lo
 
 <br />
 
+## Running Main Dash App
+1. To run the Main App, run the following line.
+    ```
+    $ python app.py
+    ```
+
+<br />
+
 ## Running Dash App for indivdual lab  
-1. To run dash app for each lab, run the following line (make sure replace n with 1,2,3)  
+1. To run dash app for each lab, run the following line.   
     ```
     # lab 1
-    $ python lab1/app.py  
+    $ python lab1app.py  
     # lab 2
-    $ python lab2/app.py  
+    $ python lab2app.py  
     # lab 3
-    $ python lab3/app.py  
+    $ python lab3app.py  
     ```
 2. Open browser in your local machine and navigate http://localhost:8050 
 
