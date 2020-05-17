@@ -126,3 +126,9 @@ https://towardsdatascience.com/create-a-multipage-dash-application-eceac464de91
 
 How to Build a Reporting Dashboard using Dash and Plotly
 https://towardsdatascience.com/how-to-build-a-complex-reporting-dashboard-using-dash-and-plotl-4f4257c18a7f
+
+
+
+Config GitHub
+$ git config — global user.name “todatech”
+$ git config — global user.email “tonani@gmail.com”
