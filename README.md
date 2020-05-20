@@ -148,3 +148,13 @@ $ conda install -c conda-forge scikit-surprise
 ### Recommender Systems Library in Python
 
 [Welcome to Surprise' documentation](https://surprise.readthedocs.io/en/stable/)
+
+### Building a Recommender System
+
+[How to build a Simple Recommender System in Python](https://towardsdatascience.com/how-to-build-a-simple-recommender-system-in-python-375093c3fb7d)
+
+[Recommendation Systems : User-based Collaborative Filtering using N Nearest Neighbors](https://medium.com/sfu-cspmp/recommendation-systems-user-based-collaborative-filtering-using-n-nearest-neighbors-bf7361dc24e0)
+
+[Quick Guide to Build a Recommendation Engine in Python & R](https://www.analyticsvidhya.com/blog/2016/06/quick-guide-build-recommendation-engine-python/)
+
+[Recommender Systems with Python— Part II: Collaborative Filtering (K-Nearest Neighbors Algorithm)](https://heartbeat.fritz.ai/recommender-systems-with-python-part-ii-collaborative-filtering-k-nearest-neighbors-algorithm-c8dcd5fd89b2)
