@@ -3,9 +3,10 @@ import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 
-from comp.navbar import Navbar
+# from comp.navbar import Navbar
+# nav = Navbar()
 
-nav = Navbar()
+from layouts import navbar
 
 colors = {
     'background': '#111111',
@@ -47,7 +48,7 @@ body = html.Div(style={'backgroundColor': colors['background']}, children=[
 
 def App():
     layout = html.Div([
-        nav,
+        navbar,
         body
     ])
     return layout

@@ -3,9 +3,8 @@ import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 
-from comp.navbar import Navbar
+from layouts import navbar
 
-nav = Navbar()
 
 colors = {
     'background': '#111111',
@@ -14,47 +13,29 @@ colors = {
 
 body = html.Div(style={'backgroundColor': colors['background']}, children=[
     html.H1(
-        children='Lab 2 Page',
+        children='Lab 2 Dash',
         style={
             'textAlign': 'center',
             'color': colors['text']
         }
     ),
-    html.Div(children='Dash App for Lab1', style={
-        'textAlign': 'center',
-        'color': colors['text']
-    }),
-    dcc.Graph(
-        id='Graph1',
-        figure={
-            'data': [
-                {'x': [1, 2, 3], 'y': [4, 1, 2],
-                 'type': 'bar', 'name': 'SF'},
-                {'x': [1, 2, 3], 'y': [2, 4, 5],
-                 'type': 'bar', 'name': u'Montréal'},
-            ],
-            'layout': {
-                'plot_bgcolor': colors['background'],
-                'paper_bgcolor': colors['background'],
-                'font': {
-                    'color': colors['text']
-                }
-            }
-        }
-    )
+    dcc.Dropdown(
+        id='lab2app-dropdown',
+        options=[{'label': i, 'value': i} for i in ['LA', 'NYC', 'MTL']],
+        value='LA'
+    ),
+    html.Div(id='lab2app-display-value')
 ])
-
 
 def App():
     layout = html.Div([
-        nav,
+        navbar,
         body
     ])
     return layout
 
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.UNITED])
-app.layout = App()
-
 if __name__ == "__main__":
+    app = dash.Dash(__name__, external_stylesheets=[dbc.themes.UNITED])
+    app.layout = App()
     app.run_server()
