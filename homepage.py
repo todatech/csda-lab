@@ -4,9 +4,9 @@ import dash_core_components as dcc
 import dash_html_components as html
 
 
-from comp.navbar import Navbar
-
-nav = Navbar()
+# from comp.navbar import Navbar
+# nav = Navbar()
+from layouts import navbar
 
 body = dbc.Container(
     [
@@ -14,18 +14,41 @@ body = dbc.Container(
             [
                 dbc.Col(
                     [
-                        html.H2("Heading"),
+                        html.H2("Advanced Methods of Data Analysis"),
+                        html.Br(),
+                        html.A(
+                            html.H4("Lab 1 - Recommender System for Movies"),
+                            href='/lab1'
+                        ),
                         html.P(
                             """\
-Donec id elit non mi porta gravida at eget metus.Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentumnibh, ut fermentum massa justo sit amet risus. Etiam porta semmalesuada magna mollis euismod. Donec sed odio dui. Donec id elit nonmi porta gravida at eget metus. Fusce dapibus, tellus ac cursuscommodo, tortor mauris condimentum nibh, ut fermentum massa justo sitamet risus. Etiam porta sem malesuada magna mollis euismod. Donec sedodio dui."""
+                            Description for Lab 1"""
                         ),
-                        dbc.Button("View details", color="secondary"),
+                        html.Br(),
+                        html.A(
+                            html.H4("Lab 2 - TBD"), 
+                            href='/lab2'
+                        ),
+                        html.P(
+                            """\
+                            Description for Lab 2"""
+                        ),
+                        html.Br(),
+                        html.A(
+                            html.H4("Lab 3 - TBD"), 
+                            href='/lab3'    
+                        ),
+                        html.P(
+                            """\
+                            Description for Lab 3"""
+                        ),
+                        # dbc.Button("View details", color="secondary"),
                     ],
                     md=4,
                 ),
                 dbc.Col(
                     [
-                        html.H2("Graph"),
+                        # html.H2("Graph"),
                         dcc.Graph(
                             figure={"data": [{"x": [1, 2, 3], "y": [1, 4, 9]}]}
                         ),
@@ -39,7 +62,7 @@ Donec id elit non mi porta gravida at eget metus.Fusce dapibus, tellus ac cursus
 
 def Homepage():
     layout = html.Div([
-        nav,
+        navbar,
         body
     ])
     return layout
