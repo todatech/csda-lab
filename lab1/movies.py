@@ -1,4 +1,5 @@
 import logging
+import pickle
 import pandas as pd
 import numpy as np
 import re
@@ -51,6 +52,12 @@ def get_top_n(predictions, n=10):
 
     return top_n
 
+class Recommender_Datatype:
+    def __init__(self):
+        self.genres = None
+        self.cosine_similarity_matrix = None
+        self.cf_top_ten_prediction_matrix = None
+        self.algo = None
 
 # Recommender Class
 class Recommender:
@@ -64,18 +71,54 @@ class Recommender:
         self.cosine_similarity_matrix = None
         self.cf_top_ten_prediction_matrix = None
         self.algo = None
-        logger.info('loading data...')
+        logger.info('populating move and rating data...')
         self.load_movie_data()
         self.load_rating_data()
         #self.start_recommender_engine()
-        logger.info('finish initialize recommender object...')
+        self.load_ml_objects()
+        logger.info('complete initializing recommender object...')
+    
+    def save_ml_objects(self):
+        mypath = os.path.abspath(os.path.dirname(__file__))
+        path = os.path.join(mypath, '../data/ml_objects.pkl')
+
+        if not self.genres and not self.cosine_similarity_matrix and not self.cf_top_ten_prediction_matrix and not self.algo:            
+            logger.info('Saving objects to ml_objects.pkl.')
+            my_list = [
+                self.genres,
+                self.cosine_similarity_matrix,
+                self.cf_top_ten_prediction_matrix,
+                self.algo,
+            ]
+            with open(path, 'wb') as output:
+                pickle.dump(my_list, output, pickle.HIGHEST_PROTOCOL)
+            logger.info('finish saving ml_objects.pkl.')
+        else:
+            logger.info('Cannot find all objects to save to ml_objects.pkl.')
+
+
+    def load_ml_objects(self):
+        mypath = os.path.abspath(os.path.dirname(__file__))
+        path = os.path.join(mypath, '../data/ml_objects.pkl')
+
+        if os.path.exists(path):
+            logger.info('found ml_objects.pkl, loading from file...')
+            with open(path, 'rb') as input:
+                my_test = pickle.load(input)
+            
+            self.genres, self.cosine_similarity_matrix, self.cf_top_ten_prediction_matrix, self.algo = my_test
+            logger.info('finish loading ml_objects.pkl.')
+        else:
+            logger.info('cannot find ml_objects.pkl, starts engine to populate objects...')
+            self.start_recommender_engine()
+            self.save_ml_objects()
 
     def start_recommender_engine(self):
         logger.info('populating genres list...')
         self.populate_genres_list()
-        logger.info('starting cb engine...')
+        logger.info('populating cb engine object... ')
         self.start_content_based_engine()
-        logger.info('starting cf engine...')
+        logger.info('populating cf engine...')
         self.start_collaborative_filtering_engine()
 
     
@@ -157,6 +200,10 @@ class Recommender:
     def print_topchart(self, genre=''):
         ids = self.get_topchart(genre)
         self.print_movie_list_by_ids(ids)
+    
+    def list_topchart(self, genre=''):
+        ids = self.get_topchart(genre)
+        return self.get_movie_list_df_by_ids(ids)
 
     # Content-Based Recommender
     def start_content_based_engine(self):
@@ -201,6 +248,9 @@ class Recommender:
         print('Recommended these movies if you like :', title)
         self.print_movie_list_by_ids(ids)
 
+    def list_cb_recommender_by_title(self, title):
+        ids = self.cb_recommended_movies_by_title(title, n=10)
+        return self.get_movie_list_df_by_ids(ids)
 
     # Collaborative Filtering
     def start_collaborative_filtering_engine(self):
@@ -234,6 +284,14 @@ class Recommender:
         ids = self.cf_recommended_movies_by_uid(uid)
         self.print_movie_list_by_ids(ids)
 
+    def list_cf_user_rated_list_by_uid(self, uid):
+        ids = self.rd[self.rd['userId'] == uid][['movieId']]
+        return self.get_movie_list_df_by_ids(ids['movieId']) 
+
+    def list_cf_recommender_by_uid(self, uid):
+        ids = self.cf_recommended_movies_by_uid(uid)
+        return self.get_movie_list_df_by_ids(ids) 
+
 
     # Hybrid Recommender
     def hybrid_recommender(self, uid, title):
@@ -252,6 +310,10 @@ class Recommender:
         print('\nWe think you might like these: ')
         ids = self.hybrid_recommender(uid,title)
         self.print_movie_list_by_ids(ids)
+
+    def list_hybrid_recommender(self, uid, title):
+        ids = self.hybrid_recommender(uid,title)
+        return self.get_movie_list_df_by_ids(ids) 
 
 
 # General Test Code
