@@ -12,12 +12,6 @@ from app import rec
 
 from layouts import navbar
 
-
-genre_list = [ '', 'Drama', 'Comedy', 'Thriller', 'Romance', 'Action', 'Horror', 
-                'Crime', 'Documentary', 'Adventure', 'Science Fiction', 'Family', 
-                'Mystery', 'Fantasy', 'Animation', 'Music', 'Foreign', 'History',
-                'War', 'Western', 'TV Movie']
-
 body = dbc.Container(
     [
         dbc.Row(
@@ -33,7 +27,7 @@ body = dbc.Container(
                         html.Div(
                             [
                                 dcc.Dropdown(
-                                    id='debug-show-hide',
+                                    id='dropdown-to-show_or_hide-element',
                                     options=[
                                         {'label': 'Debug - Show element',
                                             'value': 'on'},
@@ -42,9 +36,9 @@ body = dbc.Container(
                                     ],
                                     value='off'
                                 ),
-                            ],
+                            ], 
                             # for debugging 'block' = enable, 'none' = disable
-                            style={'display': 'block'}
+                            style={'display': 'none'}
                         )
                     ], className="m-4",
                 ),
@@ -57,7 +51,7 @@ body = dbc.Container(
                         html.H4("1. Top Chart by Genre"),
                         html.P(
                             """\
-                            May we suggest Top Movies that are highly acclaimed under each genre."""
+                            May we suggest Top Movies that are highly acclaimed under each genres."""
                         ),
                         html.Br(),
                         html.Label(
@@ -66,25 +60,21 @@ body = dbc.Container(
                         dcc.Dropdown(
                             id='lab1app-tc-dropdown',
                             options=[{'label': i, 'value': i}
-                                     for i in genre_list],
-                            value=''
+                                     for i in ['LA', 'NYC', 'MTL']],
+                            value='LA'
                         ),
                         dbc.Button("List Movies", id="lab1app-tc-button", color="default",
                                    style={
                                        'float': 'right'}
                                    ),
-                        html.Div(
-                            [
-                                html.Div("Placeholder", id='lab1app-tc-display-value', )
-                            ], style={'display': 'block'},
-                        ), 
+                        html.Div(id='lab1app-tc-display-value'),
                     ],
                     md=6,
                 ),
                 dbc.Col(
                     [
                         html.H4(
-                            "2. Recommending Movies based on a title you've picked"),
+                            "2. Recommended Movies based on a Similar Title you've picked"),
                         html.P(
                             """\
                             Please enter a movie title and we will suggest similar titles to you."""
@@ -113,11 +103,7 @@ body = dbc.Container(
                                        'float': 'right'
 
                                    }),
-                        html.Div(
-                            [
-                                html.Div("Placeholder", id='lab1app-cb-display-value', )
-                            ], style={'display': 'block'},
-                        ),
+                        html.Div(id='lab1app-cb-display-value'),
                     ],
                     md=6,
                 ),
@@ -128,10 +114,10 @@ body = dbc.Container(
                 dbc.Col(
                     [
                         html.H4(
-                            "3. Recommending Movies based on Your Previous Ratings"),
+                            "3. Recommended Movies based on Your Previous Ratings"),
                         html.P(
                             """\
-                            Please enter your UserID. We will find your rating history and will suggest titles you might like."""
+                            Enter your userid and we will find your rating history and we will suggest titles you might like."""
                         ),
                         html.Br(),
                         dbc.Row(
@@ -147,7 +133,7 @@ body = dbc.Container(
                                     html.Div(
                                         [
                                             dcc.Input(id='lab1app-cf-userid',
-                                                      value='2', type='number',
+                                                      value='1', type='number',
                                                       min=0, step=1),
                                         ],
                                         id="styled-numeric-input",
@@ -159,31 +145,16 @@ body = dbc.Container(
                                    style={
                                        'float': 'right'}
                                    ),
-                        html.Br(),
-                        html.Div(
-                            [
-                                html.Div("Placeholder", id='lab1app-cf-display-value'),
-                            ], style={'display': 'block'}
-                        ),
-                        html.Div(
-                            children="", id='lab1app-rating-status'
-                        ),                        
-                        dt.DataTable(
-                            id='rating',
-                            columns=[{"name": i, "id": i} for i in df.columns],
-                            # data=df.to_dict('records'),
-                            data=None,
-                        ),
-
+                        html.Div(id='lab1app-cf-display-value'),
                     ],
                     md=6,
                 ),
                 dbc.Col(
                     [
-                        html.H4("4. Based on what you are watching and what you've rated, may we suggest..."),
+                        html.H4("4. Based on what you are watching, we suggest"),
                         html.P(
                             """\
-                            Please enter your userid and the title you are watching now, and we will suggest highly acclaimed titles you would most likely love."""
+                            Enter your userid and title you are watching now, and we will suggest highly acclaimed titles you most likely would love."""
                         ),
                         html.Br(),
                         dbc.Row(
@@ -199,7 +170,7 @@ body = dbc.Container(
                                     html.Div(
                                         [
                                             dcc.Input(id='lab1app-hr-title',
-                                                      value='Avatar', type='text'),
+                                                      value='Batman', type='text'),
                                         ]
                                     )
                                 ),
@@ -218,7 +189,7 @@ body = dbc.Container(
                                     html.Div(
                                         [
                                             dcc.Input(id='lab1app-hr-userid',
-                                                      value='2', type='number',
+                                                      value='1', type='number',
                                                       min=0,
                                                       step=1),
                                         ],
@@ -230,11 +201,8 @@ body = dbc.Container(
                         html.Br(),
                         dbc.Button("List Movies", id="lab1app-hr-button", color="default",
                                    style={'float': 'right'}),
-                        html.Div(
-                            [
-                                html.Div('Placeholder', id='lab1app-hr-display-value'),
-                            ], style={'display': 'block'}
-                        ),
+                        html.Div(id='lab1app-hr-display-value'),
+
                     ],
                     md=6,
                 ),
@@ -248,7 +216,7 @@ body = dbc.Container(
                             children="Movies Recommendations",
                         ),
                         html.Div(
-                            children="", id='lab1app-status'
+                            children="Hello, This is the result.", id='testp'
                         ),
                         dt.DataTable(
                             id='table',
