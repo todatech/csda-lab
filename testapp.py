@@ -12,13 +12,14 @@ import dash_core_components as dcc
 from dash.dependencies import Output, Input
 
 # Navbar
-from comp.navbar import Navbar
+from app import app
+from layouts import navbar
+
 
 df = pd.read_csv('https://gist.githubusercontent.com/joelsewhere/f75da35d9e0c7ed71e5a93c10c52358d/raw/d8534e2f25495cc1de3cd604f952e8cbc0cc3d96/population_il_cities.csv')
 df.set_index(df.iloc[:, 0], drop=True, inplace=True)
 df = df.iloc[:, 1:]
 
-nav = Navbar()
 
 header = html.H3(
     'Select the name of an Illinois city to see its population!'
@@ -38,10 +39,9 @@ output = html.Div(id='output',
                   )
 
 
-
 def App():
     layout = html.Div([
-        nav,
+        navbar,
         header,
         dropdown,
         output
@@ -66,10 +66,6 @@ def build_graph(city):
     return graph
 
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.UNITED])
-app.layout = App()
-
-
 @app.callback(
     Output('output', 'children'),
     [Input('pop_dropdown', 'value')]
@@ -80,4 +76,4 @@ def update_graph(city):
 
 
 if __name__ == "__main__":
-    server = app.run_server(host='0.0.0.0', port=8050)
+    app.run_server(host='0.0.0.0', port=8050)

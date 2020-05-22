@@ -1,12 +1,10 @@
-import dash
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 
-
-# from comp.navbar import Navbar
-# nav = Navbar()
 from layouts import navbar
+from app import app
+
 
 body = dbc.Container(
     [
@@ -60,16 +58,13 @@ body = dbc.Container(
 )
 
 
-def Homepage():
+def App():
     layout = html.Div([
         navbar,
         body
     ])
     return layout
 
-
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.UNITED])
-app.layout = Homepage()
 
 if __name__ == "__main__":
     app.run_server()

@@ -1,6 +1,8 @@
+import logging
 import pandas as pd
 import numpy as np
 import re
+import os.path
 
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.metrics.pairwise import linear_kernel, cosine_similarity
@@ -11,8 +13,15 @@ from surprise.model_selection import cross_validate
 
 from collections import defaultdict
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 
 # Helper Functions
+
+def get_name():
+    print(__name__)
+
 def convert_to_list(x):
   return [y.strip("\'") for y in x.strip("[]").split(', ')]
 
@@ -55,18 +64,40 @@ class Recommender:
         self.cosine_similarity_matrix = None
         self.cf_top_ten_prediction_matrix = None
         self.algo = None
+        logger.info('loading data...')
         self.load_movie_data()
         self.load_rating_data()
+        #self.start_recommender_engine()
+        logger.info('finish initialize recommender object...')
+
+    
+    def start_recommender_engine(self):
+        logger.info('populating genres list...')
         self.populate_genres_list()
+        logger.info('starting cb engine...')
         self.start_content_based_engine()
+        logger.info('starting cf engine...')
         self.start_collaborative_filtering_engine()
 
     
     def load_movie_data(self):
-        self.md = pd.read_csv('../input/movies_cleaned.csv')
+        mypath = os.path.abspath(os.path.dirname(__file__))
+        path = os.path.join(mypath, '../input/movies_cleaned.csv')
+        self.md = pd.read_csv(path)
 
     def load_rating_data(self):
-        self.rd = pd.read_csv('../input/ratings_small.csv')
+        mypath = os.path.abspath(os.path.dirname(__file__))
+        path = os.path.join(mypath, '../input/ratings_small.csv')
+        self.rd = pd.read_csv(path)
+
+    def get_sample_df(self):
+        return self.get_movie_list_df_by_ids([862, 807, 11, 680, 13])
+
+    def get_sample_df2(self):
+        return self.get_movie_list_df_by_ids([414, 268, 364, 14919, 16234])
+
+    def get_sample_df3(self):
+        return self.get_movie_list_df_by_ids([1371, 2105, 2193, 2294, 1405])
 
     def populate_genres_list(self):
         # s = md.apply(lambda x: pd.Series(x['genres']),axis=1).stack().reset_index(level=1, drop=True)
@@ -85,7 +116,12 @@ class Recommender:
         self.genres = result
 
     def print_movie_list_by_ids(self, ids, n=10):
-        print(self.md[self.md.id.isin(ids)][['id', 'title', 'release_date']].head(n))
+        # print(self.md[self.md.id.isin(ids)][['id', 'title', 'release_date']].head(n))
+        print(self.md[self.md.id.isin(ids)][['id', 'title', 'release_date']])
+
+    def get_movie_list_df_by_ids(self, ids, n=10):
+        this_df = self.md[self.md.id.isin(ids)][['id', 'title', 'release_date']] 
+        return this_df
 
     def print_md(self):
         print(self.md)
