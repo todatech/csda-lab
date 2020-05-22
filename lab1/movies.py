@@ -74,27 +74,29 @@ class Recommender:
         logger.info('populating move and rating data...')
         self.load_movie_data()
         self.load_rating_data()
-        #self.start_recommender_engine()
-        self.load_ml_objects()
+        # self.start_recommender_engine()
+        # self.load_ml_objects()
         logger.info('complete initializing recommender object...')
     
     def save_ml_objects(self):
         mypath = os.path.abspath(os.path.dirname(__file__))
         path = os.path.join(mypath, '../data/ml_objects.pkl')
 
-        if not self.genres and not self.cosine_similarity_matrix and not self.cf_top_ten_prediction_matrix and not self.algo:            
-            logger.info('Saving objects to ml_objects.pkl.')
-            my_list = [
-                self.genres,
-                self.cosine_similarity_matrix,
-                self.cf_top_ten_prediction_matrix,
-                self.algo,
-            ]
-            with open(path, 'wb') as output:
-                pickle.dump(my_list, output, pickle.HIGHEST_PROTOCOL)
-            logger.info('finish saving ml_objects.pkl.')
-        else:
-            logger.info('Cannot find all objects to save to ml_objects.pkl.')
+        # if not self.genres and not self.cosine_similarity_matrix and not self.cf_top_ten_prediction_matrix and not self.algo:            
+
+        logger.info('Saving objects to ml_objects.pkl.')
+        my_list = [
+            self.genres,
+            self.cosine_similarity_matrix,
+            self.cf_top_ten_prediction_matrix,
+            self.algo,
+        ]
+        with open(path, 'wb') as output:
+            pickle.dump(my_list, output, pickle.HIGHEST_PROTOCOL)
+        logger.info('finish saving ml_objects.pkl.')
+
+        #else:
+        #    logger.info('Cannot find all objects to save to ml_objects.pkl.')
 
 
     def load_ml_objects(self):

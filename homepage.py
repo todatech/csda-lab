@@ -12,8 +12,27 @@ body = dbc.Container(
             [
                 dbc.Col(
                     [
-                        html.H2("Advanced Methods of Data Analysis"),
+                        # html.H2("Graph"),
+                        # dcc.Graph(
+                        #     figure={"data": [{"x": [1, 2, 3], "y": [1, 4, 9]}]}
+                        # ),
+                        html.Div(
+                            [
+                                html.H1("Advanced Methods of Data Analysis"),
+                            ], style={'textAlign':'center'}
+
+                        ),
                         html.Br(),
+                        html.Div(
+                            [
+                                html.Img(src='/assets/school_logo.png'), 
+                            ], style={ 'textAlign': 'center', 'vertical-align': 'middle' }
+
+                        )
+                    ]
+                ),                
+                dbc.Col(
+                    [
                         html.A(
                             html.H4("Lab 1 - Recommender System for Movies"),
                             href='/lab1'
@@ -43,14 +62,6 @@ body = dbc.Container(
                         # dbc.Button("View details", color="secondary"),
                     ],
                     md=4,
-                ),
-                dbc.Col(
-                    [
-                        # html.H2("Graph"),
-                        dcc.Graph(
-                            figure={"data": [{"x": [1, 2, 3], "y": [1, 4, 9]}]}
-                        ),
-                    ]
                 ),
             ]
         )

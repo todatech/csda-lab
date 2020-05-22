@@ -20,4 +20,4 @@ USER appuser
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
 EXPOSE 8050
-CMD ["python", "app.py"]
+CMD ["python", "index.py"]
