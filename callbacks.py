@@ -6,6 +6,17 @@ from dash.dependencies import Input, Output
 
 from app import app, rec
 
+# For Debugging
+
+@app.callback(
+   Output(component_id='element-to-hide', component_property='style'),
+   [Input(component_id='dropdown-to-show_or_hide-element', component_property='value')])
+
+def show_hide_element(visibility_state):
+    if visibility_state == 'on':
+        return {'display': 'block'}
+    if visibility_state == 'off':
+        return {'display': 'none'}
 
 # --- Lab 1 Callbacks
 # Top Chart
@@ -29,7 +40,8 @@ def update_tc(value, n_clicks):
     ],
 )
 def update_cb(value, n_clicks):
-    return 'You\'ve entered "{}", Clicked: "{}"'.format(value, n_clicks)
+    t = rec.get_movie_id_by_title(value)
+    return 'You\'ve entered "{}", Clicked: "{}"'.format(t, n_clicks)
 
 
 # Collaborative Filtering
@@ -56,7 +68,8 @@ def update_cf(value, n_clicks):
     ],
 )
 def update_hr(title, userid, n_clicks):
-    return 'You\'ve entered "{}", "{}", clicked: "{}"'.format(title, userid, n_clicks)
+    t = rec.get_movie_id_by_title(title)
+    return 'You\'ve entered "{}", "{}", clicked: "{}"'.format(t, userid, n_clicks)
 
 
 @app.callback(
@@ -89,6 +102,8 @@ def update_p(btn1, btn2, btn3, btn4):
         return rec.get_sample_df2().to_dict('records')
     elif button_id == 'lab1app-hr-button':
         return rec.get_sample_df3().to_dict('records')
+    else:
+        pass
 
 
 # --- Lab 2 Callbacks

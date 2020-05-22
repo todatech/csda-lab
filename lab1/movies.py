@@ -70,7 +70,6 @@ class Recommender:
         #self.start_recommender_engine()
         logger.info('finish initialize recommender object...')
 
-    
     def start_recommender_engine(self):
         logger.info('populating genres list...')
         self.populate_genres_list()
@@ -122,6 +121,17 @@ class Recommender:
     def get_movie_list_df_by_ids(self, ids, n=10):
         this_df = self.md[self.md.id.isin(ids)][['id', 'title', 'release_date']] 
         return this_df
+
+    def get_movie_id_by_title(self, title):
+        a = self.md[self.md['title'] == title]
+        if a.empty:
+            #print('Is Empty')
+            return []
+        else:
+            # print('Found Title')
+            # print(a.index)
+            
+            return a.id.astype('int')
 
     def print_md(self):
         print(self.md)

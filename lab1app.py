@@ -24,6 +24,22 @@ body = dbc.Container(
                                 'textAlign': 'center'
                             }
                         ),
+                        html.Div(
+                            [
+                                dcc.Dropdown(
+                                    id='dropdown-to-show_or_hide-element',
+                                    options=[
+                                        {'label': 'Debug - Show element',
+                                            'value': 'on'},
+                                        {'label': 'Debug - Hide element',
+                                            'value': 'off'}
+                                    ],
+                                    value='off'
+                                ),
+                            ], 
+                            # for debugging 'block' = enable, 'none' = disable
+                            style={'display': 'none'}
+                        )
                     ], className="m-4",
                 ),
             ],
@@ -48,9 +64,9 @@ body = dbc.Container(
                             value='LA'
                         ),
                         dbc.Button("List Movies", id="lab1app-tc-button", color="default",
-                            style={
-                                'float': 'right'}
-                        ),
+                                   style={
+                                       'float': 'right'}
+                                   ),
                         html.Div(id='lab1app-tc-display-value'),
                     ],
                     md=6,
