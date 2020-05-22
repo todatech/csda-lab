@@ -52,7 +52,7 @@ You will be able to start creating Juypter Notebook in VSCode environment, as lo
 1. To run the Main App, run the following line.
 
     ```bash
-    $ python app.py
+    $ python index.py
     ```
 
 <br />  
