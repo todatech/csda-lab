@@ -9,7 +9,7 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.UNITED], server=serve
 app.config.suppress_callback_exceptions = True
 
 # run following in command to load gunicorn server
-# gunicorn app:app.server -b :8050 -c gunicorn.py
+# gunicorn index:server -b :8050 -c gunicorn.py 
 
 # Lab 1
 rec = Recommender()
