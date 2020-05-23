@@ -8,6 +8,8 @@ app.config.suppress_callback_exceptions = True
 
 # Lab 1
 rec = Recommender()
+
+# For Production only
 rec.load_ml_objects()
 
 df = rec.get_sample_df()
