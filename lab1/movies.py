@@ -126,12 +126,12 @@ class Recommender:
     
     def load_movie_data(self):
         mypath = os.path.abspath(os.path.dirname(__file__))
-        path = os.path.join(mypath, '../input/movies_cleaned.csv')
+        path = os.path.join(mypath, '../data/movies_cleaned.csv')
         self.md = pd.read_csv(path)
 
     def load_rating_data(self):
         mypath = os.path.abspath(os.path.dirname(__file__))
-        path = os.path.join(mypath, '../input/ratings_small.csv')
+        path = os.path.join(mypath, '../data/ratings_small.csv')
         self.rd = pd.read_csv(path)
 
     def get_sample_df(self):

@@ -2,8 +2,8 @@
 .DS_Store
 
 # csv Files
-*.csv
-*.zip
+input/*.csv
+input/*.zip
 
 # pickle datafile
 *.pkl
