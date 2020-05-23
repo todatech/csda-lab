@@ -123,6 +123,7 @@ class Recommender:
         self.start_content_based_engine()
         logger.info('populating cf engine...')
         self.start_collaborative_filtering_engine()
+        logger.info('finish populating cf/cb engine')
 
     
     def load_movie_data(self):
