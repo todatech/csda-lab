@@ -23,6 +23,8 @@ Sangeeta Khanna (ID: )
 
 - We share work on github.com. Link is [here](https://github.com/todatech/csda-lab.git)
 
+# Introduction
+During the last few decades, with the rise of Amazon, Youtube, Netflix and many other such web services, recommender systems becomes more and more common in our lives. Recommendation systems help users find and select items (e.g., books, movies, restaurants) from the huge number available on the web. In general, recommender systems are algorithms aimed at suggesting relevant items to users (items being movies to watch, text to read, products to buy etc.). Providing an effective and personalization movie recommender system to the users was our primary motivation in project. In this project, we will go through 4 different movie recommender systems. For each of them, we will present how they work, describe their theoretical basis and discuss their strengths and weaknesses.
 
 # Description of Dataset
 
@@ -114,7 +116,7 @@ This project includes four different recommender systems for the movies dataset:
 
 3. Collaborative Filtering Recommender
     
-    This system recomend movies use techeque "Collaborative Filtering" to make recommendations to users, and it based on the idea that users can be used to predict how much they  will like a particular product or service those users have not used/experienced. In the dataset, "rating.csv" contained a series of movie rating records (rating from 1-5) by individual users. By leveraging a python package called "scikit-surprise", we are able to build a collaborative filtering recommender system with ease. In a simplier term, we used SVD algorithm to train a model with sets of rating records, that consisted of userid, movieid, and rating information. We further used this model to predict what the end user will rate for a given movie id. We validated our prediction in our analysis and it gives roughly ~0.9 RSME accuracy for 5-fold cross-validations.
+    Collaborative filtering for recommender systems are methods that are based solely on the past interactions recorded between users and items in order to produce new recommendations. In the dataset, "rating.csv" contained a series of movie rating records (rating from 1-5) by individual users. By leveraging a python package called "scikit-surprise", we are able to build a collaborative filtering recommender system with ease. In a simplier term, we used SVD algorithm to train a model with sets of rating records, that consisted of userid, movieid, and rating information. We further used this model to predict what the end user will rate for a given movie id. We validated our prediction in our analysis and it gives roughly ~0.9 RSME accuracy for 5-fold cross-validations.
 
 4. Hybrid Recommender
 
@@ -124,7 +126,7 @@ This project includes four different recommender systems for the movies dataset:
 
 In this project, we have built 4 different recommender systems based on different ideas and algorithms. They are as follows:
 
-1. Simple Recommender: This system used overall TMDB Vote Count and Vote Averages to build Top Movies Charts, in general and for a specific genre. The IMDB Weighted Rating System was used to calculate ratings on which the sorting was finally performed.
+1. Simple Recommender: This system used overall Vote Count and Vote Averages to build Top Movies Charts, in general and for a specific movie category.
 2. Content Based Recommender: We built two content based engines; one that took movie overview and taglines as input and the other which took metadata such as cast, crew, genre and keywords to come up with predictions. We also deviced a simple filter to give greater preference to movies with more votes and higher ratings.
-3. Collaborative Filtering: We used the powerful Surprise Library to build a collaborative filter based on single value decomposition. The RMSE obtained was less than 1 and the engine gave estimated ratings for a given user and movie.
-4. Hybrid Engine: We brought together ideas from content and collaborative filterting to build an engine that gave movie suggestions to a particular user based on the estimated ratings that it had internally calculated for that user.
+3. Collaborative Filtering: We used the Surprise Library to build a collaborative filter based on single value decomposition. The RMSE obtained was less than 1 and the engine gave estimated ratings for a given user and movie.
+4. Hybrid Engine: We combine the idea from content and collaborative filterting to build an engine that gave movie suggestions to a particular user based on the estimated ratings that it had internally calculated for that user.
