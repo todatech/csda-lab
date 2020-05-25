@@ -24,7 +24,7 @@ Sangeeta Khanna (ID: )
 - We share work on github.com. Link is [here](https://github.com/todatech/csda-lab.git)
 
 # Introduction
-During the last few decades, with the rise of Amazon, Youtube, Netflix and many other such web services, recommender systems becomes more and more common in our lives. Recommendation systems help users find and select items (e.g., books, movies, restaurants) from the huge number available on the web. In general, recommender systems are algorithms aimed at suggesting relevant items to users (items being movies to watch, text to read, products to buy etc.). Providing an effective and personalization movie recommender system to the users was our primary motivation in project. In this project, we will go through 4 different movie recommender systems. For each of them, we will present how they work, describe their theoretical basis and discuss their strengths and weaknesses.
+During the last few decades, with the rise of Amazon, Youtube, Netflix and many other such web services, recommender systems becomes more and more common in our lives. Recommendation systems help users find and select items (e.g., books, movies, restaurants) from the huge number available on the web. In general, recommender systems are algorithms aimed at suggesting relevant items to users (items being movies to watch, text to read, products to buy etc.). Providing an effective and personalized movie recommender system to the users was our primary motivation in project. In this project, we will go through 4 different movie recommender systems. For each of them, we will present how they work, describe their theoretical basis and discuss their strengths and weaknesses.
 
 # Description of Dataset
 
