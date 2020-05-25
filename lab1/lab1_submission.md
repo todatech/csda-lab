@@ -120,9 +120,9 @@ This project includes four different recommender systems for the movies dataset:
 
 4. Hybrid Recommender
 
-  For Hybrid Recommender, we combine the best of CB Recommender and CF Recommender to give better recommendation. First, we obtain a list of high-related movies based on end user's input, and then we evaluate each of the title to see which has higher predicted rating. Then, we present this list to our end user in a descending order list. By using our hybrid recommender, people can get different recommendations for different users although the movie is the same. Hence, this recommender system is more personalized and tailored towards particular users.
+    For Hybrid Recommender, we combine the best of CB Recommender and CF Recommender to give better recommendation. First, we obtain a list of high-related movies based on end user's input, and then we evaluate each of the title to see which has higher predicted rating. Then, we present this list to our end user in a descending order list. By using our hybrid recommender, people can get different recommendations for different users although the movie is the same. Hence, this recommender system is more personalized and tailored towards particular users.
   
-### Conclusion
+# Conclusion
 
 In this project, we have built 4 different recommender systems based on different ideas and algorithms. They are as follows:
 
