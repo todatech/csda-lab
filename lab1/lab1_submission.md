@@ -134,4 +134,4 @@ In this project, we have built 4 different recommender systems based on differen
 
 # Deployment
 
-These movie recommender system are useful for the streaming companies such as Crave or Netflix in order to engage the viewers and keep them on the website for longer period of time and more often while increasing customer’s satisfaction with the services. 
+These movie recommender systems are useful for the streaming companies such as Crave or Netflix in order to engage the viewers and keep them on the website for longer period of time and more often while increasing customer’s satisfaction with the services. 
