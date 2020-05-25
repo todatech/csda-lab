@@ -64,7 +64,7 @@ This project includes four different recommender systems for the movies dataset:
         474   329             Jurassic Park   1993-06-11
         521   424          Schindler's List   1993-11-29
 
-    The same has been applies to the different genres. The following table includes the Top Ten Movies in the Romance category:
+    The same has been applied to the different genres. The following table includes the Top Ten Movies in the Romance category:
 
         Top Movies in Romance:
              id                                  title release_date
@@ -112,6 +112,7 @@ This project includes four different recommender systems for the movies dataset:
         21042  29751  Batman Unmasked: The Psychology of the Dark Kn...   2008-07-15
         21247  21683                    Batman: Mystery of the Batwoman   2003-10-21
         25074  20077                                  Batman vs Dracula   2005-10-18
+    
     The content based engine recommender has some limitations. It can only suggest movies which are close to a certain movie. That is, it is not capable of capturing personal tastes and providing recommendations across genres. Anyone use our system for recommendations based on a movie will receive the same recommendations for that movie.
 
 3. Collaborative Filtering Recommender
