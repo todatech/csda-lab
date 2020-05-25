@@ -54,8 +54,8 @@ This project includes four different recommender systems for the movies dataset:
 
     This system recommends movies that are "highly acclaimed" based on high number of votes (vote count in the upper 0.05% quantile) and presents a list to the end user ranked by the highest vote average rating. The table below shows the results for the Top Ten Movies:
 
-    Top Movies Overall:
-              id                     title release_date
+        Top Movies Overall:
+                id                     title release_date
         0     862                 Toy Story   1995-10-30
         46    807                     Se7en   1995-09-22
         255    11                 Star Wars   1977-05-25
@@ -69,8 +69,8 @@ This project includes four different recommender systems for the movies dataset:
 
     The same has been applies to the different genres. The following table includes the Top Ten Movies in the Romance category:
 
-    Top Movies in Romance:
-                   id                                  title release_date
+        Top Movies in Romance:
+             id                                  title release_date
         350        13                           Forrest Gump   1994-07-06
         580       812                                Aladdin   1992-11-25
         1628      597                                Titanic   1997-11-18
