@@ -110,3 +110,21 @@ This project includes four different recommender systems for the movies dataset:
         21042  29751  Batman Unmasked: The Psychology of the Dark Kn...   2008-07-15
         21247  21683                    Batman: Mystery of the Batwoman   2003-10-21
         25074  20077                                  Batman vs Dracula   2005-10-18
+    The content based engine recommender has some limitations. It can only suggest movies which are close to a certain movie. That is, it is not capable of capturing personal tastes and providing recommendations across genres. Anyone use our system for recommendations based on a movie will receive the same recommendations for that movie.
+
+3. Collaborative Filtering Recommender
+    
+    This system recomend movies use techeque "Collaborative Filtering" to make recommendations to users, and it based on the idea that users can be used to predict how much they  will like a particular product or service those users have not used/experienced. In the dataset, "rating.csv" contained a series of movie rating records (rating from 1-5) by individual users. By leveraging a python package called "scikit-surprise", we are able to build a collaborative filtering recommender system with ease. In a simplier term, we used SVD algorithm to train a model with sets of rating records, that consisted of userid, movieid, and rating information. We further used this model to predict what the end user will rate for a given movie id. We validated our prediction in our analysis and it gives roughly ~0.9 RSME accuracy for 5-fold cross-validations.
+
+4. Hybrid Recommender
+
+  For Hybrid Recommender, we combine the best of CB Recommender and CF Recommender to give better recommendation. First, we obtain a list of high-related movies based on end user's input, and then we evaluate each of the title to see which has higher predicted rating. Then, we present this list to our end user in a descending order list. By using our hybrid recommender, people can get different recommendations for different users although the movie is the same. Hence, this recommender system is more personalized and tailored towards particular users.
+  
+### Conclusion
+
+In this project, we have built 4 different recommender systems based on different ideas and algorithms. They are as follows:
+
+1. Simple Recommender: This system used overall TMDB Vote Count and Vote Averages to build Top Movies Charts, in general and for a specific genre. The IMDB Weighted Rating System was used to calculate ratings on which the sorting was finally performed.
+2. Content Based Recommender: We built two content based engines; one that took movie overview and taglines as input and the other which took metadata such as cast, crew, genre and keywords to come up with predictions. We also deviced a simple filter to give greater preference to movies with more votes and higher ratings.
+3. Collaborative Filtering: We used the powerful Surprise Library to build a collaborative filter based on single value decomposition. The RMSE obtained was less than 1 and the engine gave estimated ratings for a given user and movie.
+4. Hybrid Engine: We brought together ideas from content and collaborative filterting to build an engine that gave movie suggestions to a particular user based on the estimated ratings that it had internally calculated for that user.
