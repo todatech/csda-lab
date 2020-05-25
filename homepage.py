@@ -12,10 +12,6 @@ body = dbc.Container(
             [
                 dbc.Col(
                     [
-                        # html.H2("Graph"),
-                        # dcc.Graph(
-                        #     figure={"data": [{"x": [1, 2, 3], "y": [1, 4, 9]}]}
-                        # ),
                         html.Div(
                             [
                                 html.H1("Advanced Methods of Data Analysis"),
@@ -34,12 +30,16 @@ body = dbc.Container(
                 dbc.Col(
                     [
                         html.A(
-                            html.H4("Lab 1 - Recommender System for Movies"),
+                            html.H4("Lab 1 - Movies Recommender Systems"),
                             href='/lab1'
                         ),
                         html.P(
                             """\
-                            Description for Lab 1"""
+                            We are going to explore 4 different types of Recommender Systems. In this app, 
+                            we are going to show how system perform tasks to recommend movies titles based 
+                            on a series of users inputs, preferences, rating history using Big Data Analytics 
+                            tools and techinques.
+                            """
                         ),
                         html.Br(),
                         html.A(
@@ -59,7 +59,6 @@ body = dbc.Container(
                             """\
                             Description for Lab 3"""
                         ),
-                        # dbc.Button("View details", color="secondary"),
                     ],
                     md=4,
                 ),
@@ -67,7 +66,6 @@ body = dbc.Container(
         )
     ], className="mt-4",
 )
-
 
 def App():
     layout = html.Div([

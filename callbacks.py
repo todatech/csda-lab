@@ -59,7 +59,7 @@ def update_hr(title, userid, n_clicks):
     t = rec.get_movie_id_by_title(title)
     return 'You\'ve entered "{}", "{}", clicked: "{}"'.format(t, userid, n_clicks)
 
-
+# ----------------- Button Clicked and Table Processing ------------------
 @app.callback(
     [
         Output('table', 'data'),
@@ -112,8 +112,6 @@ def update_p(btn1, btn2, btn3, btn4, tc, cb, cf, hr_uid, hr_title):
             # print("something")
             table = rec.list_cb_recommender_by_title(cb).head(10).to_dict('records')
     elif button_id == 'lab1app-cf-button':
-        # table = rec.list_topchart(tc).head(10).to_dict('records')
-        #rating_table = rec.get_sample_df2().to_dict('records')
         table = rec.list_cf_recommender_by_uid(cf).head(10).to_dict('records')
         rating_table =rec.list_cf_user_rated_list_by_uid(cf).head(10).to_dict('records')
         rating_status = 'Based on your rating history:'

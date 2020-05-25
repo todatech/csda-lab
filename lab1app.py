@@ -44,7 +44,7 @@ body = dbc.Container(
                                 ),
                             ],
                             # for debugging 'block' = enable, 'none' = disable
-                            style={'display': 'block'}
+                            style={'display': 'none'}
                         )
                     ], className="m-4",
                 ),
@@ -264,28 +264,10 @@ body = dbc.Container(
     ], className="mt-4",
 )
 
-
 colors = {
     'background': '#111111',
     'text': '#7FDBFF'
 }
-
-# body = html.Div(style={'backgroundColor': colors['background']}, children=[
-#     html.H1(
-#         children='Lab 1 Dash',
-#         style={
-#             'textAlign': 'center',
-#             'color': colors['text']
-#         }
-#     ),
-#     dcc.Dropdown(
-#         id='lab1app-dropdown',
-#         options=[{'label': i, 'value': i} for i in ['LA', 'NYC', 'MTL']],
-#         value='LA'
-#     ),
-#     html.Div(id='lab1app-display-value')
-# ])
-
 
 def App():
     layout = html.Div([

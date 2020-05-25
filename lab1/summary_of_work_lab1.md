@@ -60,3 +60,17 @@ This app is "docker-enable", which mean it can be built into containerized app.
     ```bash
     $ docker-compose up --build
     ```
+
+### Deployment
+
+#### Local Test Server
+
+This app can be run locally on your machine. Refer to README.md to setup your enviorment, load the python packages from requirements.txt and you are ready to deploy. Running the following command will launch a test server locally.
+
+    ```bash
+    $ python index.py
+    ```
+
+#### Remote Production Server
+
+This app has also been deployed to Google Cloud Platform served by production level WSGI webserver using gunicorn/nginx. Vist http://dash.todatech.ca for a demo.

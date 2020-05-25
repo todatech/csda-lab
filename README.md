@@ -125,13 +125,11 @@ $ conda install -c conda-forge scikit-surprise
 
 [Flask Tutorial in VSCode](https://code.visualstudio.com/docs/python/tutorial-flask)
 
-<br />  
-
 ### Flask and Container
 
 [Python in a container (Including Flask and Django)](https://code.visualstudio.com/docs/containers/quickstart-python)
 
-<br />  
+[The best Docker base image for your Python application (April 2020) by Itamar Turner-Trauring](https://pythonspeed.com/articles/base-image-python-docker-images/)
 
 ### Dash
 
@@ -144,6 +142,12 @@ $ conda install -c conda-forge scikit-surprise
 [Create a Multipage Dash Application](https://towardsdatascience.com/create-a-multipage-dash-application-eceac464de91)
 
 [How to Build a Reporting Dashboard using Dash and Plotly](https://towardsdatascience.com/how-to-build-a-complex-reporting-dashboard-using-dash-and-plotl-4f4257c18a7f)
+
+### Cloud Deployment
+
+[Deploy your Dash application with Google Cloud Platform App Engine](https://datasciencecampus.github.io/deploy-dash-with-gcp/)
+
+[How To Serve Flask Applications with Gunicorn and Nginx on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-18-04)
 
 ### Recommender Systems Library in Python
 

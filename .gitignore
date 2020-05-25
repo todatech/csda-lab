@@ -8,9 +8,11 @@ input/*.zip
 # pickle datafile
 *.pkl
 
+# python enviroment
 env/
 .venv/
-
 __pycache__/
+
+# VSCode
 .vscode/
 

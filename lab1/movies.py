@@ -67,7 +67,7 @@ class Recommender:
     def __init__(self):
         self.md = None
         self.rd = None
-        # self.genres = None
+        self.genres = None
         self.cosine_similarity_matrix = None
         self.cf_top_ten_prediction_matrix = None
         self.algo = None
@@ -86,7 +86,7 @@ class Recommender:
 
         logger.info('Saving objects to ml_objects.pkl.')
         my_list = [
-            # self.genres,
+            self.genres,
             self.cosine_similarity_matrix,
             self.cf_top_ten_prediction_matrix,
             self.algo,
@@ -117,8 +117,8 @@ class Recommender:
             self.save_ml_objects()
 
     def start_recommender_engine(self):
-        # logger.info('populating genres list...')
-        # self.populate_genres_list()
+        logger.info('populating genres list...')
+        self.populate_genres_list()
         logger.info('populating cb engine object...')
         self.start_content_based_engine()
         logger.info('populating cf engine...')
@@ -145,21 +145,21 @@ class Recommender:
     def get_sample_df3(self):
         return self.get_movie_list_df_by_ids([1371, 2105, 2193, 2294, 1405])
 
-    # def populate_genres_list(self):
-    #     # s = md.apply(lambda x: pd.Series(x['genres']),axis=1).stack().reset_index(level=1, drop=True)
-    #     s = self.md.apply(lambda x: pd.Series(convert_to_list(x['genres'])),axis=1).stack().reset_index(level=1, drop=True)
-    #     s.name = 'genre'
-    #     s = s.to_frame()
-    #     s.columns = ['genre']
-    #     genre_list = s['genre'].unique()
+    def populate_genres_list(self):
+        # s = md.apply(lambda x: pd.Series(x['genres']),axis=1).stack().reset_index(level=1, drop=True)
+        s = self.md.apply(lambda x: pd.Series(convert_to_list(x['genres'])),axis=1).stack().reset_index(level=1, drop=True)
+        s.name = 'genre'
+        s = s.to_frame()
+        s.columns = ['genre']
+        genre_list = s['genre'].unique()
 
-    #     #remove empty strings
-    #     result = []
-    #     for x in genre_list:
-    #         if (x != ''):
-    #             result.append(x)
+        #remove empty strings
+        result = []
+        for x in genre_list:
+            if (x != ''):
+                result.append(x)
 
-    #     self.genres = result
+        self.genres = result
 
     def print_movie_list_by_ids(self, ids, n=10):
         # print(self.md[self.md.id.isin(ids)][['id', 'title', 'release_date']].head(n))

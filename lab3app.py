@@ -54,8 +54,7 @@ def App():
     return layout
 
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.UNITED])
-app.layout = App()
-
 if __name__ == "__main__":
+    app = dash.Dash(__name__, external_stylesheets=[dbc.themes.UNITED])
+    app.layout = App()
     app.run_server()
