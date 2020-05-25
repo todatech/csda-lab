@@ -1,8 +1,3 @@
-# Lab 1 Submission
-
-hello world
-add
-
 **CSDA1040: Advanced Methods of Data Analysis**
 
 **Lab 1 -Recommender System**
