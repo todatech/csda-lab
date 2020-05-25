@@ -136,4 +136,9 @@ In this project, we have built 4 different recommender systems based on differen
 
 These movie recommender systems are useful for the streaming companies such as Crave or Netflix in order to engage the viewers and keep them on the website for longer period of time and more often while increasing customer’s satisfaction with the services. 
 
+These models can be improved by including the following information to complement the existing dataset:
+1.	Provide gender and other related information about individual customer
+2.	Provide geographical location on watching movies
+3.	Provide time-variant of this dataset, such as holiday movie watching
+
 This model should be reviewed and updated every 3-5 years, as we wish to find out whether there is a change of consumer behaviors. This might be due to changes in external factors that are not depicted in our model.
