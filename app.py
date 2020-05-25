@@ -1,12 +1,12 @@
 import dash
-# import flask
+import flask
 import dash_bootstrap_components as dbc
 from lab1.movies import Recommender
 
 
 # ------------- General Startup -----------------------
 # 
-# server = flask.Flask(__name__) # define flask app.server
+server = flask.Flask(__name__) # define flask app.server
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.UNITED], server=server)
 app.config.suppress_callback_exceptions = True
