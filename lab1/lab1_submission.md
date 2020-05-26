@@ -119,9 +119,44 @@ This project includes four different recommender systems for the movies dataset:
     
     Collaborative filtering for recommender systems are methods that are based solely on the past interactions recorded between users and items in order to produce new recommendations. In the dataset, "rating.csv" contained a series of movie rating records (rating from 1-5) by individual users. By leveraging a python package called "scikit-surprise", we are able to build a collaborative filtering recommender system with ease. In a simplier term, we used SVD algorithm to train a model with sets of rating records, that consisted of userid, movieid, and rating information. We further used this model to predict what the end user will rate for a given movie id. We validated our prediction in our analysis and it gives roughly ~0.9 RSME accuracy for 5-fold cross-validations.
 
+        For User:  1
+        Movies that this user rated before:
+                id                           title release_date
+        2284   1371                       Rocky III   1982-05-28
+        2577   2105                    American Pie   1999-07-09
+        3197   2193                        My Tutor   1983-03-04
+        4580   2294  Jay and Silent Bob Strike Back   2001-08-22
+        8265   1405                           Greed   1924-12-04
+        10664  2455            Confidentially Yours   1983-08-10
+
+        Moives that this user may like:
+                 id                               title release_date
+        333    2064             While You Were Sleeping   1995-04-21
+        3042    926                        Galaxy Quest   1999-12-23
+        4000    318            The Million Dollar Hotel   2000-02-09
+        6108   6016                      The Good Thief   2003-04-03
+        6351    296  Terminator 3: Rise of the Machines   2003-07-02
+        11407  1247                   The Good Shepherd   2006-12-11
+
 4. Hybrid Recommender
 
     For Hybrid Recommender, we combine the best of CB Recommender and CF Recommender to give better recommendation. First, we obtain a list of high-related movies based on end user's input, and then we evaluate each of the title to see which has higher predicted rating. Then, we present this list to our end user in a descending order list. By using our hybrid recommender, people can get different recommendations for different users although the movie is the same. Hence, this recommender system is more personalized and tailored towards particular users.
+
+        Based on your ranking history and that you are watching this movie: 
+        Avatar
+
+        We think you might like these: 
+                 id                                       title release_date
+        602    8766                       Hellraiser: Bloodline   1996-03-08
+        2444    603                                  The Matrix   1999-03-30
+        3057  10384                                   Supernova   2000-01-14
+        3517  38688             Pandora and the Flying Dutchman   1951-02-15
+        3633  16096                               House Party 2   1991-10-23
+        3638  26270                           Project Moon Base   1953-09-04
+        4590   8922                            Jeepers Creepers   2001-07-01
+        044   9567                            Tears of the Sun   2003-03-07
+        6378   1996  Lara Croft Tomb Raider: The Cradle of Life   2003-07-21
+        9028  63054                                    Fetishes   1996-09-12
   
 # Conclusion
 
