@@ -84,10 +84,10 @@ class SpamIdentifier:
         logger.info('completing spam id engine...')
     
     def get_sample_ham(self):
-        return self.spam_data[self.spam_data['label'] == 'ham'].sample(5)
+        return self.spam_data[self.spam_data['label'] == 'ham'][['text']].sample(5)
 
     def get_sample_spam(self):
-        return self.spam_data[self.spam_data['label'] == 'spam'].sample(5)
+        return self.spam_data[self.spam_data['label'] == 'spam'][['text']].sample(5)
     
     def load_spam_data(self):
         mypath = os.path.abspath(os.path.dirname(__file__))

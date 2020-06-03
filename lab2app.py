@@ -25,7 +25,7 @@ body = dbc.Container(
                         html.Div(
                             [
                                 dcc.Dropdown(
-                                    id='debug-show-hide',
+                                    id='debug-show-hide-lab2',
                                     options=[
                                         {'label': 'Debug - Show element',
                                             'value': 'on'},
@@ -36,7 +36,7 @@ body = dbc.Container(
                                 ),
                             ],
                             # for debugging 'block' = enable, 'none' = disable
-                            style={'display': 'none'}
+                            style={'display': 'block'}
                         )
                     ], className="m-4",
                 ),
@@ -46,28 +46,45 @@ body = dbc.Container(
             [
                 dbc.Col(
                     [
-                        html.H4("1. Sample of Valid Messages"),
+                        html.H4("1. Sample Valid Messages"),
                         html.P(
                             """\
-                            These are some of the messages that have been marked as Valid message."""
+                            These are some of the messages that have been marked as Valid from DB."""
                         ),
                         html.Br(),
-                        html.Label(
-                            'Please select a Genre of your choice (or clear for Overall Top Movies)'),
+                        dt.DataTable(
+                            id='ham-msg',
+                            columns=[{"name": i, "id": i} for i in spam.get_sample_ham().columns],
+                            data=spam.get_sample_ham().to_dict('records'),
+                            style_cell={
+                                'overflow': 'hidden',
+                                'textOverflow': 'ellipsis',
+                                'maxWidth': 0,
+                                'textAlign': 'left',
+                            },
+                            style_data={
+                                'whiteSpace': 'normal',
+                                'height': 'auto',
+                            },                                    
+                            css=[{
+                                'selector': '.dash-spreadsheet td div',
+                                'rule': '''
+                                    line-height: 15px;
+                                    max-height: 30px; min-height: 30px; height: 30px;
+                                    display: block;
+                                    overflow-y: hidden;
+                                '''
+                            }],
+                            # data=None,
+                        ),                        
                         html.Br(),
-                        dcc.Dropdown(
-                            id='lab1app-tc-dropdown',
-                            options=[{'label': i, 'value': i}
-                                     for i in ['one', 'two', 'three']],
-                            value=''
-                        ),
-                        dbc.Button("List Movies", id="lab1app-tc-button", color="default",
+                        dbc.Button("List Valid Messages", id="lab2app-ham-button", color="default",
                                    style={
                                        'float': 'right'}
                                    ),
                         html.Div(
                             [
-                                html.Div("Placeholder", id='lab1app-tc-display-value', )
+                                html.Div("Placeholder", id='lab2app-ham-display-value', )
                             ], style={'display': 'block'},
                         ), 
                     ],
@@ -76,38 +93,49 @@ body = dbc.Container(
                 dbc.Col(
                     [
                         html.H4(
-                            "2. Sample of Spam Messages "),
+                            "2. Sample Spam Message"),
                         html.P(
                             """\
-                            These are some of the messages that have been marked as SPAM."""
+                            These are some of the messages that have been marked as SPAM from DB."""
                         ),
                         html.Br(),
-                        dbc.Row(
-                            [
-                                dbc.Col(
-                                    html.Div(
-                                        [
-                                            html.Label('Movie Title'),
-                                        ]
-                                    ), width=3
-                                ),
-                                dbc.Col(
-                                    [
-                                        dcc.Input(id='lab1app-cb-title',
-                                                  value='Avatar', type='text',
-                                                  className="mb-3"),
-                                    ]
-                                ),
-                            ]
-                        ),
-                        dbc.Button("List Movies", id="lab1app-cb-button", color="default",
+                        dt.DataTable(
+                            id='spam-msg',
+                            # columns=[{"name": i, "id": i} for i in df.columns],
+                            # data=df.to_dict('records'),
+                            # data=None,
+                            columns=[{"name": i, "id": i} for i in spam.get_sample_spam().columns],
+                            data=spam.get_sample_spam().to_dict('records'),
+                            style_cell={
+                                'overflow': 'hidden',
+                                'textOverflow': 'ellipsis',
+                                'maxWidth': 0,
+                                'textAlign': 'left',
+                            },
+                            style_data={
+                                'whiteSpace': 'normal',
+                                'height': 'auto',
+                            },                                    
+                            css=[{
+                                'selector': '.dash-spreadsheet td div',
+                                'rule': '''
+                                    line-height: 15px;
+                                    max-height: 30px; min-height: 30px; height: 30px;
+                                    display: block;
+                                    overflow-y: hidden;
+                                '''
+                            }],
+
+                        ),                        
+                        html.Br(),
+                        dbc.Button("List Spam Messages", id="lab2app-spam-button", color="default",
                                    style={
                                        'float': 'right'
 
                                    }),
                         html.Div(
                             [
-                                html.Div("Placeholder", id='lab1app-cb-display-value', )
+                                html.Div("Placeholder", id='lab2app-spam-display-value', )
                             ], style={'display': 'block'},
                         ),
                     ],
@@ -119,138 +147,31 @@ body = dbc.Container(
             [
                 dbc.Col(
                     [
-                        html.H4(
-                            "3. Recommending Movies based on Your Previous Ratings"),
+                        html.H4("3. Test Your Message"),
                         html.P(
                             """\
-                            Please enter your UserID. We will find your rating history and will suggest titles you might like."""
+                            Type your own message below to see if the system will flag it as Spam or not."""
                         ),
-                        html.Br(),
-                        dbc.Row(
-                            [
-                                dbc.Col(
-                                    html.Div(
-                                        [
-                                            html.Label('UserID'),
-                                        ]
-                                    ), width=3
-                                ),
-                                dbc.Col(
-                                    html.Div(
-                                        [
-                                            dcc.Input(id='lab1app-cf-userid',
-                                                      value='2', type='number',
-                                                      min=0, step=1),
-                                        ],
-                                        id="styled-numeric-input",
-                                    ),
-                                ),
-                            ]
+                        dcc.Input(id='lab2app-user-msg',
+                            value='Write Message Here...', 
+                            type='text',
+                            style={'width': '80%'},
                         ),
-                        dbc.Button("List Movies", id="lab1app-cf-button", color="default",
-                                   style={
-                                       'float': 'right'}
-                                   ),
                         html.Br(),
                         html.Div(
                             [
-                                html.Div("Placeholder", id='lab1app-cf-display-value'),
-                            ], style={'display': 'block'}
-                        ),
-                        html.Div(
-                            children="", id='lab1app-rating-status'
-                        ),                        
-                        dt.DataTable(
-                            id='rating',
-                            columns=[{"name": i, "id": i} for i in df.columns],
-                            # data=df.to_dict('records'),
-                            data=None,
-                        ),
-
-                    ],
-                    md=6,
-                ),
-                dbc.Col(
-                    [
-                        html.H4("4. Based on what you are watching and what you've rated, may we suggest..."),
-                        html.P(
-                            """\
-                            Please enter your userid and the title you are watching now, and we will suggest highly acclaimed titles you would most likely love."""
-                        ),
-                        html.Br(),
-                        dbc.Row(
-                            [
-                                dbc.Col(
-                                    html.Div(
-                                        [
-                                            html.Label('Movie Title'),
-                                        ]
-                                    ), width=3
-                                ),
-                                dbc.Col(
-                                    html.Div(
-                                        [
-                                            dcc.Input(id='lab1app-hr-title',
-                                                      value='Avatar', type='text'),
-                                        ]
-                                    )
-                                ),
-                            ]
-                        ),
-                        dbc.Row(
-                            [
-                                dbc.Col(
-                                    html.Div(
-                                        [
-                                            html.Label('UserID'),
-                                        ]
-                                    ), width=3
-                                ),
-                                dbc.Col(
-                                    html.Div(
-                                        [
-                                            dcc.Input(id='lab1app-hr-userid',
-                                                      value='2', type='number',
-                                                      min=0,
-                                                      step=1),
-                                        ],
-                                        id="styled-numeric-input",
-                                    ),
+                                html.Span(
+                                    id='lab2app-spam-not-spam',
                                 ),
                             ]
                         ),
                         html.Br(),
-                        dbc.Button("List Movies", id="lab1app-hr-button", color="default",
-                                   style={'float': 'right'}),
-                        html.Div(
-                            [
-                                html.Div('Placeholder', id='lab1app-hr-display-value'),
-                            ], style={'display': 'block'}
+                        dbc.Button("Send Me Message", id="lab2app-msg-button", color="default",
+                            style={'float': 'left'},
                         ),
                     ],
-                    md=6,
                 ),
-            ], className="m-4",
-        ),
-        dbc.Row(
-            [
-                dbc.Col(
-                    [
-                        html.H4(
-                            children="Movies Recommendations",
-                        ),
-                        html.Div(
-                            children="", id='lab1app-status'
-                        ),
-                        dt.DataTable(
-                            id='table',
-                            columns=[{"name": i, "id": i} for i in df.columns],
-                            # data=df.to_dict('records'),
-                            data=None,
-                        ),
 
-                    ]
-                ),
             ], className="m-4",
         ),
     ], className="mt-4",

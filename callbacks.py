@@ -4,7 +4,7 @@ import dash_html_components as html
 
 from dash.dependencies import Input, Output
 
-from app import app, rec
+from app import app, rec, spam
 
 
 # --- Lab 1 Callbacks
@@ -152,8 +152,93 @@ def show_hide_element(value):
 
 
 # --- Lab 2 Callbacks
+# --------------------- Input Testing --------------------------
+# Ham Message
 @app.callback(
-    Output('lab2app-display-value', 'children'),
-    [Input('lab2app-dropdown', 'value')])
-def display_value2(value):
-    return 'In Lab 2, you have selected "{}"'.format(value)
+    Output('lab2app-ham-display-value', 'children'),
+    [
+        Input('lab2app-ham-button', 'n_clicks'),
+    ],
+)
+def update_lab2_tc(n_clicks):
+    return 'You\'ve clicked: "{}"'.format(n_clicks)
+
+# Spam Message
+@app.callback(
+    Output('lab2app-spam-display-value', 'children'),
+    [
+        Input('lab2app-spam-button', 'n_clicks'),
+    ],
+)
+def update_lab2_cb(n_clicks):
+    return 'You\'ve clicked: "{}"'.format(n_clicks)
+
+
+# ----------------- Button Clicked and Table Processing ------------------
+@app.callback(
+    [
+        Output('ham-msg', 'data'),
+        Output('spam-msg', 'data'),
+        Output('lab2app-spam-not-spam', 'children')
+    ],
+    [
+        #buttons
+        Input('lab2app-ham-button', 'n_clicks'),
+        Input('lab2app-spam-button', 'n_clicks'),
+        Input('lab2app-msg-button', 'n_clicks'),
+        Input('lab2app-user-msg', 'value')
+    ],
+)
+def update_msg(btn1, btn2, btn3, user_msg):
+
+    # See Dash Advanced callbacks
+    # https://dash.plotly.com/advanced-callbacks
+
+    ctx = dash.callback_context
+
+    ham_msg_table = None
+    spam_msg_table = None    
+    msg = ''
+
+    if not ctx.triggered:
+        button_id = 'No clicks yet'
+    else:
+        button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+
+
+    if button_id == 'lab2app-ham-button':
+        ham_msg_table = spam.get_sample_ham().to_dict('records')
+    elif button_id == 'lab2app-spam-button':
+        spam_msg_table = spam.get_sample_spam().to_dict('records')
+    elif button_id == 'lab2app-msg-button':
+        result = spam.identify_message(user_msg)
+        a = result.tolist()
+        if a[0]:
+            msg = 'Your message seems like a SPAM to me...'
+        else:
+            msg = 'Your message seems OK...'
+        #msg = user_msg
+    else:
+        pass
+
+    return [ham_msg_table, spam_msg_table, msg]
+
+# For Debugging - Lab 2
+@app.callback(
+    [
+        Output('lab2app-ham-display-value', 'style'),
+        Output('lab2app-spam-display-value', 'style'),
+    ],
+    [
+        Input('debug-show-hide-lab2', 'value'),
+    ],
+)
+def show_hide_element_lab2(value):
+    result = {}
+
+    if value == 'on':
+        result = {'display': 'block'}
+    if value == 'off':
+        result = {'display': 'none'}
+
+    return result, result, 
