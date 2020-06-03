@@ -8,6 +8,12 @@ input/*.zip
 # pickle datafile
 *.pkl
 
+# keras model
+*.h5
+
+# word2vec model
+*.w2v
+
 # python enviroment
 env/
 .venv/
