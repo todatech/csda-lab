@@ -43,7 +43,7 @@ body = dbc.Container(
                         ),
                         html.Br(),
                         html.A(
-                            html.H4("Lab 2 - TBD"), 
+                            html.H4("Lab 2 - Identifying Spam Messages and Sentimental Analysis within the Messages"), 
                             href='/lab2'
                         ),
                         html.P(

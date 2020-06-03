@@ -2,7 +2,7 @@ import dash
 import flask
 import dash_bootstrap_components as dbc
 from lab1.movies import Recommender
-
+from lab2.spammer import SpamIdentifier
 
 # ------------- General Startup -----------------------
 # 
@@ -16,8 +16,17 @@ app.config.suppress_callback_exceptions = True
 
 
 # -------------- Lab 1 -------------------------------
+# ------ Uncomment follows to enable Lab 1 to run-----
+
 # affixing a recommender object that is visible to the whole project
 rec = Recommender()
+# rec.start_recommender_engine()
+
+# For Production only - NOT TO SAVE ML model to disk, calculate 
+# and load into memory ON THE FLY
+df = rec.get_sample_df()
+
+# ----------------------------------------------------
 
 # You can stop loading ML objects inside the recommender engine by
 # commenting out the following two lines of code. THIS WILL HELP
@@ -28,9 +37,6 @@ rec = Recommender()
 # Note: requires a lot of memory and disk space. NOT recommended.
 # rec.load_ml_objects()
 
-# For Production only - NOT TO SAVE ML model to disk, calculate 
-# and load into memory ON THE FLY
-rec.start_recommender_engine()
 
-# Dummy df 
-df = rec.get_sample_df()
+# -------------- Lab 2 -------------------------------
+spam = SpamIdentifier()
