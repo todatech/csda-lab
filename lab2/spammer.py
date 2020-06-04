@@ -8,22 +8,30 @@ import numpy as np
 import re
 import os.path
 
+# Scikit-learn
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-
 from sklearn.svm import LinearSVC
-
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
+# nltk
 import nltk
 from nltk.corpus import stopwords
 
-
+# logger for displaying objects status 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-# Helper Functions
+# -------- static variables -------------------------
+# FILE PATH
+FPATH = "../data/"
+
+# EXPORT
+SPAM_DATA = FPATH + "spam_cleaned.csv"
+
+
+# --------- Helper Functions -------------------------
 def remove_punctuation_and_stopwords(msg):
     
     sms_no_punctuation = [ch for ch in msg if ch not in string.punctuation]
@@ -34,11 +42,18 @@ def remove_punctuation_and_stopwords(msg):
         
     return sms_no_punctuation_no_stopwords
 
+def get_file_path(path):
+    this_path = os.path.abspath(os.path.dirname(__file__))
+    return os.path.join(this_path, path)
+
 
 # SpamIdentifier Class
 class SpamIdentifier:
-    '''
-    A spam message identifier using a set of labelled data whether it is spam/ham (bad/good) msg
+    '''SpamIdentifier Class
+    This python class implemented Natural Language Processing (NLP) techniques to build a machine-learning
+    model to predict whether a message is a spam or not. First, labelled text messages are being tokenized and vectorized
+    using TF-IDF methods. Then, classifier model (linearSVC) is built using these labelled messages (i.e. spam/ham).
+    Finally, this class is able to predict message whether is it spam or not spam with a reasonable accuracy.
     '''
     def __init__(self):
         self.spam_data = None
@@ -46,36 +61,36 @@ class SpamIdentifier:
         self.Xctr_tf_fitted = None
         self.start_spam_id_engine()
 
-    def save_ml_objects(self):
-        mypath = os.path.abspath(os.path.dirname(__file__))
-        path = os.path.join(mypath, '../data/ml_spam_obj.pkl')
+    # def save_ml_objects(self):
+    #     mypath = os.path.abspath(os.path.dirname(__file__))
+    #     path = os.path.join(mypath, '../data/ml_spam_obj.pkl')
 
-        logger.info('Saving ML/spam objects to data/ml_spam_obj.pkl')
+    #     logger.info('Saving ML/spam objects to data/ml_spam_obj.pkl')
         
-        my_list = [
-            self.Xctr_tf_fitted,
-            self.algo,
-        ]
-        with open(path, 'wb') as output:
-            pickle.dump(my_list, output, pickle.HIGHEST_PROTOCOL)
-        logger.info('Finish saving ml_objects.pkl.')
+    #     my_list = [
+    #         self.Xctr_tf_fitted,
+    #         self.algo,
+    #     ]
+    #     with open(path, 'wb') as output:
+    #         pickle.dump(my_list, output, pickle.HIGHEST_PROTOCOL)
+    #     logger.info('Finish saving ml_objects.pkl.')
     
-    def load_ml_objects(self):
-        mypath = os.path.abspath(os.path.dirname(__file__))
-        path = os.path.join(mypath, '../data/ml_spam_obj.pkl')
+    # def load_ml_objects(self):
+    #     mypath = os.path.abspath(os.path.dirname(__file__))
+    #     path = os.path.join(mypath, '../data/ml_spam_obj.pkl')
 
-        if os.path.exists(path):
-            logger.info('found data/ml_spam_obj.pkl, loading from file...')
-            with open(path, 'rb') as input:
-                my_test = pickle.load(input)
+    #     if os.path.exists(path):
+    #         logger.info('found data/ml_spam_obj.pkl, loading from file...')
+    #         with open(path, 'rb') as input:
+    #             my_test = pickle.load(input)
             
-            # self.genres, 
-            self.Xctr_tf_fitted, self.algo = my_test
-            logger.info('finish loading ml_objects.pkl.')
-        else:
-            logger.info('cannot data/ml_spam_obj.pkl, starts engine to populate objects...')
-            self.start_spam_id_engine()
-            self.save_ml_objects()
+    #         # self.genres, 
+    #         self.Xctr_tf_fitted, self.algo = my_test
+    #         logger.info('finish loading ml_objects.pkl.')
+    #     else:
+    #         logger.info('cannot data/ml_spam_obj.pkl, starts engine to populate objects...')
+    #         self.start_spam_id_engine()
+    #         self.save_ml_objects()
 
     def start_spam_id_engine(self):
         logger.info('starting spam id engine...')
@@ -90,8 +105,7 @@ class SpamIdentifier:
         return self.spam_data[self.spam_data['label'] == 'spam'][['text']].sample(5)
     
     def load_spam_data(self):
-        mypath = os.path.abspath(os.path.dirname(__file__))
-        path = os.path.join(mypath, '../data/spam_cleaned.csv')
+        path = get_file_path(SPAM_DATA)
         self.spam_data = pd.read_csv(path, encoding='latin-1')
 
     def build_model(self):
@@ -103,7 +117,8 @@ class SpamIdentifier:
         logger.info('Vectorizing Training Set...')
         tf = TfidfVectorizer(use_idf=True)
         self.Xctr_tf_fitted = tf.fit(Xc_train)
-        # should save Xct_tf_fitted in pickle to freeze the vocab list
+        # TODO: should save Xct_tf_fitted in pickle to freeze the vocab list
+        # Since this is a small model, we can let it compute everytime without saving
         Xctr_tf_fitted_txform = self.Xctr_tf_fitted.transform(Xc_train)
 
         logger.info('Vectorizing Test Set...')
@@ -119,9 +134,6 @@ class SpamIdentifier:
         logger.info(msg)
 
     def identify_message(self, message):
-        # if not self.tvec:
-        #    self.start_spam_id_engine()
-        
         filtered_msg = remove_punctuation_and_stopwords(message)
         filtered_msg = ' '.join(filtered_msg)
         tf1 = TfidfVectorizer(use_idf=True, vocabulary=self.Xctr_tf_fitted.vocabulary_)
