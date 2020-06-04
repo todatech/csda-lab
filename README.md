@@ -1,6 +1,30 @@
 # CSDA Labs
 
-This README.md provides instructions to setup your enivornment so you can start writing code for the lab assignments. Refer to [this link](instruction.md) for instructions on the Lab.  
+## Welcome
+Purpose of this repository is to host the lab work completed by Group 8 - CSDA1040 Advanced Methods of Data Analysis(Fall, 2019)
+
+Further instructions to setup your enivornment will be provided below, as to help everyone to start writing code for the lab assignments. And, refer to [this link](instruction.md) for instructions of the Lab.  
+
+<br />
+
+## Written Report and Documentation
+
+Individual lab has its own written report and documentation, please refer to markdown as shown below for further details.
+
+### Lab 1
+
+- [Summary of Work](lab1/summary_of_work_lab1.md)
+- [Lab Report - For Submission](lab1/lab1_submission.md)
+
+### Lab 2
+
+- [Summary of Work](lab2/summary_of_work_lab2.md)
+- [Lab Report - For Submission](lab2/lab2_submission.md)
+
+### Lab 3
+
+- [Summary of Work](lab3/summary_of_work_lab3.md)
+- [Lab Report - For Submission](lab3/lab3_submission.md)
 
 <br />  
 
