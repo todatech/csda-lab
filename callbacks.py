@@ -1,15 +1,13 @@
 import json
 import dash
 import dash_html_components as html
+import time
 
 from dash.dependencies import Input, Output
 
-from app import app, rec, spam
+from app import app, rec, spam, sti
 
 
-# --- Lab 1 Callbacks
-# --------------------- Input Testing --------------------------
-# Top Chart
 @app.callback(
     Output('lab1app-tc-display-value', 'children'),
     [
@@ -199,6 +197,8 @@ def update_msg(btn1, btn2, btn3, user_msg):
     ham_msg_table = None
     spam_msg_table = None    
     msg = ''
+    spam_id_msg = ''
+    sti_msg = ''
 
     if not ctx.triggered:
         button_id = 'No clicks yet'
@@ -212,12 +212,28 @@ def update_msg(btn1, btn2, btn3, user_msg):
         spam_msg_table = spam.get_sample_spam().to_dict('records')
     elif button_id == 'lab2app-msg-button':
         result = spam.identify_message(user_msg)
+        result2 = sti.predict(user_msg)
+
+        # Unpacking spam engine results
         a = result.tolist()
         if a[0]:
-            msg = 'Your message seems like a SPAM to me...'
+            spam_id_msg = 'Your message seems like a SPAM to me...'
         else:
-            msg = 'Your message seems OK...'
+            spam_id_msg = 'Your message seems OK to me...'
         #msg = user_msg
+
+        # Unpacking sentiment engine results
+        if result2['label'] == 'POSITIVE':
+            sti_msg = 'You sound POSITIVE to me'
+        elif result2['label'] == 'NEGATIVE':
+            sti_msg = 'You sound NEGATIVE to me'
+        elif result2['label'] == 'NEUTRAL':
+            sti_msg = 'You seem NEUTRAL with your topic'
+        else:
+            pass
+
+        msg = sti_msg + ' and ' + spam_id_msg
+
     else:
         pass
 
@@ -242,3 +258,97 @@ def show_hide_element_lab2(value):
         result = {'display': 'none'}
 
     return result, result, 
+
+
+
+# --- Settings Page Callbacks
+# --------------------- Input Testing --------------------------
+# lab1 button
+@app.callback(
+    Output('settings-lab1-display-value', 'children'),
+    [
+        Input('settings-lab1-button', 'n_clicks'),
+    ],
+)
+def update_settings_lab1_tc(n_clicks):
+    return 'You\'ve clicked: "{}"'.format(n_clicks)
+
+# lab2 button
+@app.callback(
+    Output('settings-lab2-display-value', 'children'),
+    [
+        Input('settings-lab2-button', 'n_clicks'),        
+    ],
+)
+def update_settings_lab2_tc(n_clicks):
+    return 'You\'ve clicked: "{}"'.format(n_clicks)
+
+# lab3 button
+@app.callback(
+    Output('settings-lab3-display-value', 'children'),
+    [
+        Input('settings-lab3-button', 'n_clicks'),
+    ],
+)
+def update_settings_lab3_tc(n_clicks):
+    return 'You\'ve clicked: "{}"'.format(n_clicks)
+
+# General Setting Buttons
+@app.callback(
+    Output('settings-gen-display-value', 'children'),
+    [
+        Input('settings-gen-button', 'n_clicks'),
+    ],
+)
+def update_settings_gen_tc(n_clicks):
+    return 'You\'ve clicked: "{}"'.format(n_clicks)
+
+# ----------------- Button Clicked and Table Processing ------------------
+@app.callback(
+    Output("settings-lab1-loading1-output", "children"),
+    [
+        Input("settings-lab1-button", "n_clicks"),
+        Input('settings-lab1-button2', 'n_clicks'),
+        Input('settings-lab1-button3', 'n_clicks'),        
+    ],
+)
+def settings_lab1_engine(btn1, btn2, btn3):
+    ctx = dash.callback_context
+    if not ctx.triggered:
+        button_id = 'No clicks yet'
+    else:
+        button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+
+    if button_id == 'settings-lab1-button':
+        # time.sleep(1)
+        rec.start_recommender_engine()
+        return 'Load Engine Completed'
+    elif button_id == 'settings-lab1-button2':
+        # time.sleep(1)
+        return 'Disabled Function'
+    elif button_id == 'settings-lab1-button3':
+        return 'Disabled Function'
+    else:
+        pass
+
+# For Debugging - General Settings
+@app.callback(
+    [
+        Output('settings-lab1-display-value', 'style'),
+        Output('settings-lab2-display-value', 'style'),
+        Output('settings-lab3-display-value', 'style'),
+        Output('settings-gen-display-value', 'style'),
+    ],
+    [
+        Input('debug-show-hide-lab2', 'value'),
+    ],
+)
+def show_hide_element_settings(value):
+    result = {}
+
+    if value == 'on':
+        result = {'display': 'block'}
+    if value == 'off':
+        result = {'display': 'none'}
+
+    return result, result, result, result,

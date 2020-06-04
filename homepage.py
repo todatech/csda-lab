@@ -43,12 +43,17 @@ body = dbc.Container(
                         ),
                         html.Br(),
                         html.A(
-                            html.H4("Lab 2 - Identifying Spam Messages and Sentimental Analysis of Messages"), 
+                            html.H4("Lab 2 - Identifying Spam and Determining Sentiment in Text Messages"), 
                             href='/lab2'
                         ),
                         html.P(
                             """\
-                            Description for Lab 2"""
+                            For the first part of this lab, we use text mining techniques to determine whether 
+                            a message is a valid one or a spam. In the second part, we determine the sentiment
+                            within the messages that users might hold when they compose these messages.
+                            Both problems fall under classification, but we use two different alogrithms to 
+                            process them, 1.) SVM for spam identification and 2.) LSTM neural networks for 
+                            analyzing sentiment. """
                         ),
                         html.Br(),
                         html.A(
@@ -59,8 +64,17 @@ body = dbc.Container(
                             """\
                             Description for Lab 3"""
                         ),
+                        html.Br(),
+                        html.A(
+                            html.H4("Settings"), 
+                            href='/settings'    
+                        ),
+                        html.P(
+                            """\
+                            To load and unload some of the backend engines"""
+                        ),
                     ],
-                    md=4,
+                    md=6,
                 ),
             ]
         )

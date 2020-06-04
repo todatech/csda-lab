@@ -2,6 +2,19 @@
 
 Changes to this project will be documented here (starting from lab2). Please use the following format to capture changes to the project
 
+## [1.1.1] - 2020-06-04
+
+### Added
+
+- added a mechanism to load recommender engine for lab1 via a button in setting.
+
+## [1.1.0] - 2020-06-04
+
+### Completed
+
+- completed Lab 2 python class for spam and sentiment engine.
+- integrated spam and sentiment engine into lab2 app.
+
 ## [1.0.0] - 2020-05-25
 
 ### Added

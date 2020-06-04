@@ -36,7 +36,7 @@ body = dbc.Container(
                                 ),
                             ],
                             # for debugging 'block' = enable, 'none' = disable
-                            style={'display': 'block'}
+                            style={'display': 'none'}
                         )
                     ], className="m-4",
                 ),

@@ -13,6 +13,8 @@ navbar = dbc.NavbarSimple(
         dbc.NavItem(dbc.NavLink("Lab 1", href="/lab1")),
         dbc.NavItem(dbc.NavLink("Lab 2", href="/lab2")),
         dbc.NavItem(dbc.NavLink("Lab 3", href="/lab3")),
+        dbc.NavItem(dbc.NavLink("Settings", href="/settings")),
+
         # dbc.DropdownMenu(
         #     nav=True,
         #     in_navbar=True,

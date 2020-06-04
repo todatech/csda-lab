@@ -12,6 +12,7 @@ import homepage
 import lab1app
 import lab2app
 import lab3app
+import settingsapp
 from layouts import layout1
 
 
@@ -19,6 +20,7 @@ app.layout = html.Div([
    dcc.Location(id='url', refresh=False),
    html.Div(id='page-content')
 ])
+
 
 @app.callback(Output('page-content', 'children'), [Input('url', 'pathname')])
 def display_page(pathname):
@@ -28,6 +30,8 @@ def display_page(pathname):
       return lab2app.App()
    elif pathname == '/lab3':
       return lab3app.App()
+   elif pathname == '/settings':
+      return settingsapp.App()
    elif pathname == '/layout1':
       layout = html.Div([
         navbar,

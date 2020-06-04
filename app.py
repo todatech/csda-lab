@@ -3,6 +3,7 @@ import flask
 import dash_bootstrap_components as dbc
 from lab1.movies import Recommender
 from lab2.spammer import SpamIdentifier
+from lab2.sentiment import SentimentInferencing
 
 # ------------- General Startup -----------------------
 # 
@@ -40,3 +41,4 @@ df = rec.get_sample_df()
 
 # -------------- Lab 2 -------------------------------
 spam = SpamIdentifier()
+sti = SentimentInferencing()
