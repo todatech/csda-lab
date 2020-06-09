@@ -144,7 +144,7 @@ We selected linearSVC estimator for our Spam Identifier Engine because it result
 
 ## SENTIMENT ANALYSIS USING DEEP LEARNING METHODS
 
-For deep learning part of the exercise, we selected the twitter sentiment dataset for this demonstration. This dataset can be found here.
+For deep learning part of the exercise, we selected the twitter sentiment dataset for this demonstration. This dataset can be found [here] (http://help.sentiment140.com/for-students/).
 
 We went through the same process as lab2a. We carried out data preprocessing, feature extraction, and modeling for this second part of the lab. Instead of using the "traditional" scikit-learn library, we followed the example from Paolo Ripamonti and built a sentiment engine using Gensim/Keras.
 
