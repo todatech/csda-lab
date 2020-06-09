@@ -159,7 +159,9 @@ This module contains library of Sentiment Analyzing Class. When the engine is up
 [Lab 2b Sentiment Analyzing Engine Class Test Notebook](https://github.com/todatech/csda-lab/blob/master/lab2/sentiment_class_test.ipynb)
 
 This engine can help us identify the sentiment of the sentence. It can also give us some examples of the positive or negative examples.
+
 ![Here are some results](src/Sentiment1.PNG)
+
 ![Here are some examples](src/Sentiment example.PNG)
 
 
