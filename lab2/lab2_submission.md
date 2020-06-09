@@ -161,11 +161,16 @@ This module contains library of Sentiment Analyzing Class. When the engine is up
 This engine can help us identify the sentiment of the sentence. It can also give us some examples of the positive or negative examples.
 
 ![Here are some results](src/Sentiment1.PNG)
-![Examples](src/Sentiment example.PNG)
 
 
 
 ## Description of Twitter Sentiment Dataset
+[twiter data explore](https://github.com/todatech/csda-lab/blob/master/lab2/twitter_sentiment_data_explore.ipynb)
+
+Our Work is based on "Another Twitter sentiment analysis with Python" by Ricky Kim on towardsdatascience.com
+
+There are heavy modifications to the original work for code enhancements, encapsulation, improvement, bug fixing in order to make the original source work for this project. Eventually, a realization of deep learning model within a python class called SentimentInferencing. Python source can be found in [sentiment.py](https://github.com/todatech/csda-lab/blob/master/lab2/sentiment.py)
+
 
 ## Keras Neural Network and Long Short Term Memory (LSTM)
 
