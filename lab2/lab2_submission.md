@@ -196,6 +196,14 @@ Here is the learning history:
 
 
 ## Conclusion for Lab 2 Text Mining and Deep Learning
-
+The Lab 2 we did the text mining for SMS spam plus the deep learning, and our deep learning model gives us accuracy around 0.78. The model can be used to identy the spam and also analysis the sentiment of the message. 
 
 ![Prediction results](src/Preciction%20result.PNG)
+
+## Deployment
+
+## Link to Shiny App
+The application is deployed at http://dash.todatech.ca:8050/. 
+The code of the application is located on Github. 
+
+
