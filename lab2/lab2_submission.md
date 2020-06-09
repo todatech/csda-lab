@@ -202,8 +202,8 @@ The Lab 2 we did the text mining for SMS spam plus the deep learning, and our de
 
 ## Deployment
 
-## Link to Shiny App
-The application is deployed at http://dash.todatech.ca:8050/. 
+## Link to Dash App
+The application is deployed at http://dash.todatech.ca:8050/
 The code of the application is located on Github. 
 
 
