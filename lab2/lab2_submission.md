@@ -202,8 +202,12 @@ The Lab 2 we did the text mining for SMS spam plus the deep learning, and our de
 
 ## Deployment
 
+We deployed application at http://dash.todatech.ca:8050/
+
+In Dash app we deployed Positive and negative sentiments  and also the type of message we put  app will identify if this positive or negative sentiment.
+
 ## Link to Dash App
-The application is deployed at http://dash.todatech.ca:8050/
+The application is deployed at http://dash.todatech.ca:8050/. 
 The code of the application is located on Github. 
 
 
