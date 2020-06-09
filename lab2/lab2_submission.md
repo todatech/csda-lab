@@ -150,7 +150,7 @@ We went through the same process as lab2a. We carried out data preprocessing, fe
 
 Gensim is a Topic Modeling Engine for processing text and for word vector generation. Keras, on the other hand, is a wrapper for the underlying tensorflow neural network engine. In Paolo's example, he used LSTM as the underlying neural networking model for sentiment detection. We borrowed his example and implemented a python engine for our dash app. However, for our application, we tuned down the model by tweaking down some of the parameters, as well as downsizing the dataset in order to minimize the model generation time from 8+ hours down to 10 mins. Nonetheless, this model still give a respectable 0.78 accuracy even though we slashed the model heavily.
 
-## Introduction for Sentiment Analysis
+### Introduction for Sentiment Analysis
 
 This module contains library of Sentiment Analyzing Class. When the engine is up and running, it is able to detect sentiment within a text string, whether it is a POSITIVE mesage, NEGATIVE, or NEUTRAL.
 
@@ -160,11 +160,9 @@ This module contains library of Sentiment Analyzing Class. When the engine is up
 
 This engine can help us identify the sentiment of the sentence. It can also give us some examples of the positive or negative examples.
 
-![Here are some results](src/Sentiment1.PNG)
 
 
-
-## Description of Twitter Sentiment Dataset
+### Description of Twitter Sentiment Dataset
 [Part1 - Twitter sentiment data explore](https://github.com/todatech/csda-lab/blob/master/lab2/twitter_sentiment_data_explore.ipynb)
 
 Our Work is based on "Another Twitter sentiment analysis with Python" by Ricky Kim on towardsdatascience.com
@@ -172,11 +170,25 @@ Our Work is based on "Another Twitter sentiment analysis with Python" by Ricky K
 There are heavy modifications to the original work for code enhancements, encapsulation, improvement, bug fixing in order to make the original source work for this project. Eventually, a realization of deep learning model within a python class called SentimentInferencing. Python source can be found in [sentiment.py](https://github.com/todatech/csda-lab/blob/master/lab2/sentiment.py)
 
 ## Keras Neural Network and Long Short Term Memory (LSTM)
-[Part 2 - Deep Learning Model: Twitter Sentiment Analysis - Neural Network Modeling LSTM | Keras] (https://github.com/todatech/csda-lab/blob/master/lab2/twitter_sentiment_lstm.ipynb)
+[Part 2 - Deep Learning Model: Twitter Sentiment Analysis - Neural Network Modeling LSTM | Keras](https://github.com/todatech/csda-lab/blob/master/lab2/twitter_sentiment_lstm.ipynb)
 
+![Modeling and Test Train Split](Train Test Split.PNG)
 
-## Feature Extraction using Gensim Topic Modeling package
+![Building and Fitting Keras LSTM model](src/Building and Fitting Keras LSTM.PNG)
 
-## Modeling and Test Train Split
+The model accuracy results:
+
+ ACCURACY: 0.7781000137329102
+ LOSS: 0.4706464828491211
+ CPU times: user 1min 22s, sys: 5.98 s, total: 1min 28s
+ Wall time: 20.7 s
+
+![Here are Neural Network Modeling LSTM accuracy process](src/Training and validation accuracy.PNG)
+
+![Here are Neural Network Modeling LSTM loss process](src/Training and validation loss.PNG)
+
 
 ## Conclusion for Lab 2 Text Mining and Deep Learning
+![Here are some results](src/Sentiment1.PNG)
+
+![Here are prediction results from the model](src/Preciction result.PNG)
