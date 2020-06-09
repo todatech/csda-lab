@@ -154,9 +154,9 @@ Gensim is a Topic Modeling Engine for processing text and for word vector genera
 
 This module contains library of Sentiment Analyzing Class. When the engine is up and running, it is able to detect sentiment within a text string, whether it is a POSITIVE mesage, NEGATIVE, or NEUTRAL.
 
-[Lab 2b Sentiment Analyzing Engine Class](lab2/sentiment.py)
+[Lab 2b Sentiment Analyzing Engine Class](https://github.com/todatech/csda-lab/blob/master/lab2/sentiment.py)
 
-[Lab 2b Sentiment Analyzing Engine Class Test Notebook](lab2/sentiment_class_test.ipynb)
+[Lab 2b Sentiment Analyzing Engine Class Test Notebook](https://github.com/todatech/csda-lab/blob/master/lab2/sentiment_class_test.ipynb)
 
 ## Description of Twitter Sentiment Dataset
 
