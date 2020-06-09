@@ -159,6 +159,9 @@ This module contains library of Sentiment Analyzing Class. When the engine is up
 [Lab 2b Sentiment Analyzing Engine Class Test Notebook](https://github.com/todatech/csda-lab/blob/master/lab2/sentiment_class_test.ipynb)
 
 This engine can help us identify the sentiment of the sentence. It can also give us some examples of the positive or negative examples.
+![Here are some analysis results](src/Sentiment1.PNG)
+
+![Here are some examples given](src/Sentiment%20example.PNG)
 
 
 
@@ -173,7 +176,7 @@ There are heavy modifications to the original work for code enhancements, encaps
 [Part 2 - Deep Learning Model: Twitter Sentiment Analysis - Neural Network Modeling LSTM | Keras](https://github.com/todatech/csda-lab/blob/master/lab2/twitter_sentiment_lstm.ipynb)
 
 We split the data:
-![Modeling and Test Train Split](Train%20Test%20Split.PNG)
+![Modeling and Test Train Split](src/Train%20Test%20Split.PNG)
 
 Building the LSTM Model:
 ![Building and Fitting Keras LSTM model](src/Building%20and%20Fitting%20Keras%20LSTM.PNG)
@@ -193,6 +196,6 @@ Here is the learning history:
 
 
 ## Conclusion for Lab 2 Text Mining and Deep Learning
-![Here are some results](src/Sentiment1.PNG)
+
 
 ![Prediction results](src/Preciction%20result.PNG)
