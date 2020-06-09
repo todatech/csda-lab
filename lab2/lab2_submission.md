@@ -172,23 +172,27 @@ There are heavy modifications to the original work for code enhancements, encaps
 ## Keras Neural Network and Long Short Term Memory (LSTM)
 [Part 2 - Deep Learning Model: Twitter Sentiment Analysis - Neural Network Modeling LSTM | Keras](https://github.com/todatech/csda-lab/blob/master/lab2/twitter_sentiment_lstm.ipynb)
 
+We split the data:
 ![Modeling and Test Train Split](Train Test Split.PNG)
 
+Building the LSTM Model:
 ![Building and Fitting Keras LSTM model](src/Building and Fitting Keras LSTM.PNG)
 
 The model accuracy results:
 
- ACCURACY: 0.7781000137329102
- LOSS: 0.4706464828491211
- CPU times: user 1min 22s, sys: 5.98 s, total: 1min 28s
- Wall time: 20.7 s
+     ACCURACY: 0.7781000137329102
+     LOSS: 0.4706464828491211
+     CPU times: user 1min 22s, sys: 5.98 s, total: 1min 28s
+     Wall time: 20.7 s
 
-![Here are Neural Network Modeling LSTM accuracy process](src/Training and validation accuracy.PNG)
+Here is the learning history:
 
-![Here are Neural Network Modeling LSTM loss process](src/Training and validation loss.PNG)
+![Neural Network Modeling LSTM accuracy process](src/Training and validation accuracy.PNG)
+
+![Neural Network Modeling LSTM loss process](src/Training and validation loss.PNG)
 
 
 ## Conclusion for Lab 2 Text Mining and Deep Learning
 ![Here are some results](src/Sentiment1.PNG)
 
-![Here are prediction results from the model](src/Preciction result.PNG)
+![Prediction results](src/Preciction result.PNG)
