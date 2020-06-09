@@ -161,9 +161,7 @@ This module contains library of Sentiment Analyzing Class. When the engine is up
 This engine can help us identify the sentiment of the sentence. It can also give us some examples of the positive or negative examples.
 
 ![Here are some results](src/Sentiment1.PNG)
-
-
-![Here are some examples](src/Sentiment example.PNG)
+![Examples](src/Sentiment example.PNG)
 
 
 
