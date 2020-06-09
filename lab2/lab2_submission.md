@@ -166,6 +166,7 @@ This engine can help us identify the sentiment of the sentence. It can also give
 ![Here are some examples](src/Sentiment example.PNG)
 
 
+
 ## Description of Twitter Sentiment Dataset
 
 ## Keras Neural Network and Long Short Term Memory (LSTM)
