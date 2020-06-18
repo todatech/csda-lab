@@ -4,6 +4,7 @@ import dash_bootstrap_components as dbc
 from lab1.movies import Recommender
 from lab2.spammer import SpamIdentifier
 from lab2.sentiment import SentimentInferencing
+from lab3.kottrends import KeywordOverTimeTrends
 
 # ------------- General Startup -----------------------
 # 
@@ -20,12 +21,13 @@ app.config.suppress_callback_exceptions = True
 # ------ Uncomment follows to enable Lab 1 to run-----
 
 # affixing a recommender object that is visible to the whole project
-rec = Recommender()
+rec = Recommender()    ### UNCOMMENT THIS FOR LAB 1
+
 # rec.start_recommender_engine()
 
 # For Production only - NOT TO SAVE ML model to disk, calculate 
 # and load into memory ON THE FLY
-df = rec.get_sample_df()
+df = rec.get_sample_df()   ### UNCOMMENT THIS FOR LAB 1
 
 # ----------------------------------------------------
 
@@ -40,5 +42,8 @@ df = rec.get_sample_df()
 
 
 # -------------- Lab 2 -------------------------------
-spam = SpamIdentifier()
-sti = SentimentInferencing()
+spam = SpamIdentifier()      ### UNCOMMENT THIS FOR LAB 2
+sti = SentimentInferencing()      ### UNCOMMENT THIS FOR LAB 2
+
+# -------------- Lab 3 -------------------------------
+kot = KeywordOverTimeTrends()

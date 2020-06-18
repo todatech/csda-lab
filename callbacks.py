@@ -6,8 +6,9 @@ import time
 from dash.dependencies import Input, Output
 
 from app import app, rec, spam, sti
+from app import kot
 
-
+# --- Lab 1 Callbacks
 @app.callback(
     Output('lab1app-tc-display-value', 'children'),
     [
@@ -352,3 +353,56 @@ def show_hide_element_settings(value):
         result = {'display': 'none'}
 
     return result, result, result, result,
+
+# --- Lab 3 Callbacks
+# ------------------- Processing Graphic ------------------
+@app.callback(
+    [
+        Output('lab3app-test-span', 'children'),
+        Output('lab3app-trends-img', 'src'),
+        Output('lab3app-rolling-img', 'src'),
+        Output('lab3app-decomposition-img', 'src'),
+        Output('lab3app-SARIMA-diag-img', 'src'),
+        Output('lab3app-SARIMA-pred-img', 'src'),
+        # Output('lab3app-ARIMA-pred-img', 'src'),
+    ],
+    [
+        Input('lab3app-search', 'n_clicks'),
+        Input('lab3app-clear', 'n_clicks'),
+        Input('lab3app-search-term', 'value'),
+    ]
+)
+def update_graphs(btn1, btn2, kw):
+
+    ctx = dash.callback_context
+
+    trend_img = ''
+    rolling_img = ''
+    decompose_img = ''
+    sarima_diag_img = ''
+    sarima_pred_img = ''
+    arima_pred_img = ''
+    test_txt = ''
+
+    if not ctx.triggered:
+        button_id = 'No clicks yet'
+    else:
+        button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+    
+    if button_id == 'lab3app-search':
+        kot.start_search(kw)
+        # test_txt = kw
+        # test_txt = 'Search Button Clicked'
+        trend_img = kot.show_time_series_plot_in_html()
+        rolling_img = kot.show_rolling_average_plot_in_html()
+        decompose_img = kot.show_decomposition_plot_in_html()
+        sarima_diag_img = kot.show_SARIMA_diagnostics_plot_in_html()
+        sarima_pred_img = kot.show_SARIMA_prediction_plot_in_html()
+        # arima_pred_img = kot.show_ARIMA_prediction_plot_in_html()
+
+    elif button_id == 'lab3app-clear':
+        test_txt = 'Clear Button Clicked'
+    else:
+        pass
+    
+    return test_txt, trend_img, rolling_img, decompose_img, sarima_diag_img, sarima_pred_img, #arima_pred_img, 
