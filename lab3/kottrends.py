@@ -10,10 +10,8 @@ import io
 import os
 import base64
 
-
 # pytrends -- Google Trends API
 from pytrends.request import TrendReq
-
 
 # Scikit-learn
 from sklearn.metrics import mean_squared_error
@@ -26,11 +24,8 @@ import statsmodels.api as sm
 
 # graphing
 import matplotlib.pyplot as plt
-
 plt.style.use('fivethirtyeight') 
 #%matplotlib inline
-
-import seaborn as sns
 
 
 # logger for displaying object builiding status on server
@@ -50,7 +45,7 @@ GRAPH_PARAMS_FONTSIZE = 20
 ROLLING_AVG = 52  ### WEEKS
 
 # ARIMA P, d, Q
-ARIMA_ORDER =(5, 1, 0)
+ARIMA_ORDER =(1, 0, 1)
 
 # ARIMA/SARIMA - Trends P D Q
 # SARIMA - Seasonal p d q
@@ -69,6 +64,7 @@ def plt_to_html(plt):
     data = base64.b64encode(buf.getbuffer()).decode("utf8") # encode to html elements
     return "data:image/png;base64,{}".format(data)
 
+
 # KeywordOverTimeTrends Class
 class KeywordOverTimeTrends:
     '''KeywordOverTimeTrends
@@ -80,8 +76,6 @@ class KeywordOverTimeTrends:
 
     def __init__(self):
         plt.switch_backend('Agg')
-        # matplotlib.use('agg')
-
         self.pytrends = TrendReq()
         self.keyword = None
         self.df = None 
@@ -95,12 +89,13 @@ class KeywordOverTimeTrends:
         log_msg = 'starting keyword search for:' + self.keyword
         logger.info(log_msg)
         self.get_pytrend_data()
+        logger.info('cleaning dataframe...')
         self.clean_df()
         logger.info('building SARIMA...')
         self.build_SARIMA()
         # logger.info('building ARIMA...')
         # self.build_ARIMA()
-        # logger.info('finish computing kot analysis!')
+        logger.info('finish kot models!')
 
     def get_pytrend_data(self):
         self.pytrends.build_payload(kw_list=[self.keyword])
@@ -123,6 +118,7 @@ class KeywordOverTimeTrends:
     def show_time_series_plot_in_html(self):
         return plt_to_html(self.show_time_series_plot())
 
+    # we will just use decomposition plots
     def show_rolling_average_plot(self):
         self.df.rolling(ROLLING_AVG).mean().plot(figsize=GRAPH_PARAMS_FIGSIZE, linewidth=GRAPH_PARAMS_LINEWIDTH, fontsize=GRAPH_PARAMS_FONTSIZE)
         plt.xlabel('Year', fontsize=GRAPH_PARAMS_FONTSIZE)
@@ -131,7 +127,8 @@ class KeywordOverTimeTrends:
 
     def show_rolling_average_plot_in_html(self):
         return plt_to_html(self.show_rolling_average_plot())
-
+    
+    # we will just use decomposition plots
     def show_first_order_diff_plot(self):
         self.df.diff().plot(figsize=GRAPH_PARAMS_FIGSIZE, linewidth=GRAPH_PARAMS_LINEWIDTH, fontsize=GRAPH_PARAMS_FONTSIZE)
         plt.xlabel('Year', fontsize=GRAPH_PARAMS_FONTSIZE)
@@ -140,6 +137,7 @@ class KeywordOverTimeTrends:
     def show_first_order_diff_plot_in_html(self):
         return plt_to_html(self.show_first_order_diff_plot())
 
+    # we will just use decomposition plots
     def show_autocorrelation_plot(self):
         return pd.plotting.autocorrelation_plot(self.df)
     
@@ -149,9 +147,7 @@ class KeywordOverTimeTrends:
     def show_decomposition_plot(self):
         rcParams['figure.figsize'] = 12, 10
         decomposition = sm.tsa.seasonal_decompose(self.df, model='additive')
-        # fig = decomposition.plot()
         decomposition.plot()
-        # plt.show();
         return plt
     
     def show_decomposition_plot_in_html(self):
@@ -190,7 +186,16 @@ class KeywordOverTimeTrends:
     def show_SARIMA_prediction_plot_in_html(self):
         return plt_to_html(self.show_SARIMA_prediction_plot())
 
+    def show_all_plots_in_html(self):
+        a = self.show_time_series_plot_in_html()
+        b = self.show_rolling_average_plot_in_html()
+        c = self.show_decomposition_plot_in_html()
+        d = self.show_SARIMA_diagnostics_plot_in_html()
+        e = self.show_SARIMA_prediction_plot_in_html()
+        return {"tseries": a, "rolling": b, "decompose": c, "s-diag": d, "s-pred": e}
+
     def clear_all_plots(self):
+        logger.info('all plots cleared!')
         plt.close('all')
     
     # def build_ARIMA(self):

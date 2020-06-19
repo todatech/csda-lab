@@ -358,6 +358,7 @@ def show_hide_element_settings(value):
 # ------------------- Processing Graphic ------------------
 @app.callback(
     [
+        Output('lab3app-charts', 'style'),        
         Output('lab3app-test-span', 'children'),
         Output('lab3app-trends-img', 'src'),
         Output('lab3app-rolling-img', 'src'),
@@ -365,24 +366,27 @@ def show_hide_element_settings(value):
         Output('lab3app-SARIMA-diag-img', 'src'),
         Output('lab3app-SARIMA-pred-img', 'src'),
         # Output('lab3app-ARIMA-pred-img', 'src'),
+        Output("lab3app-loading1-output", "children"),
     ],
     [
         Input('lab3app-search', 'n_clicks'),
         Input('lab3app-clear', 'n_clicks'),
+        Input('lab3app-show', 'n_clicks'),
         Input('lab3app-search-term', 'value'),
     ]
 )
-def update_graphs(btn1, btn2, kw):
+def update_graphs(btn1, btn2, btn3, kw):
 
     ctx = dash.callback_context
 
+    test_txt = ''
+    chart_show = {}
     trend_img = ''
     rolling_img = ''
     decompose_img = ''
     sarima_diag_img = ''
     sarima_pred_img = ''
-    arima_pred_img = ''
-    test_txt = ''
+    # arima_pred_img = ''
 
     if not ctx.triggered:
         button_id = 'No clicks yet'
@@ -393,16 +397,29 @@ def update_graphs(btn1, btn2, kw):
         kot.start_search(kw)
         # test_txt = kw
         # test_txt = 'Search Button Clicked'
-        trend_img = kot.show_time_series_plot_in_html()
-        rolling_img = kot.show_rolling_average_plot_in_html()
-        decompose_img = kot.show_decomposition_plot_in_html()
-        sarima_diag_img = kot.show_SARIMA_diagnostics_plot_in_html()
-        sarima_pred_img = kot.show_SARIMA_prediction_plot_in_html()
+        # trend_img = kot.show_time_series_plot_in_html()
+        # rolling_img = kot.show_rolling_average_plot_in_html()
+        # decompose_img = kot.show_decomposition_plot_in_html()
+        # sarima_diag_img = kot.show_SARIMA_diagnostics_plot_in_html()
+        # sarima_pred_img = kot.show_SARIMA_prediction_plot_in_html()
         # arima_pred_img = kot.show_ARIMA_prediction_plot_in_html()
+        plots = kot.show_all_plots_in_html()
+        trend_img = plots["tseries"]
+        rolling_img = plots["rolling"]
+        decompose_img = plots["decompose"]
+        sarima_diag_img = plots["s-diag"]
+        sarima_pred_img = plots["s-pred"]
+        kot.clear_all_plots()
+        chart_show = {'display': 'block'}
 
     elif button_id == 'lab3app-clear':
-        test_txt = 'Clear Button Clicked'
+        chart_show = {'display': 'none'}
+        # test_txt = 'Clear Button Clicked'
+    elif button_id == 'lab3app-show':
+        chart_show = {'display': 'block'}
+        # test_txt = 'Show Button Clicked'
     else:
-        pass
+        chart_show = {'display': 'none'}
+
     
-    return test_txt, trend_img, rolling_img, decompose_img, sarima_diag_img, sarima_pred_img, #arima_pred_img, 
+    return chart_show, test_txt, trend_img, rolling_img, decompose_img, sarima_diag_img, sarima_pred_img, None, #arima_pred_img, 

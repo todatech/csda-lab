@@ -14,7 +14,7 @@ body = dbc.Container(
                 dbc.Col(
                     [
                         html.H2(
-                            children="Time Series Analysis of Google Trend Keywords",
+                            children="Time Series Analysis of Keywords from Google Trends",
                             style={
                                 'textAlign': 'center'
                             }
@@ -44,31 +44,51 @@ body = dbc.Container(
             [
                 dbc.Col(
                     [
-                        html.H4("Google Trend Search Term:"),
+                        html.H4("Enter a Search Term"),
                         html.P(
                             """\
-                            Please enter a Search Term to find out its time series characters"""
+                            Please enter a keyword or a phase of interest. First, \
+                            we will pull time-series data using Google's API. Then, \
+                            we will break down the time characteristics for that term."""
                         ),
-                        dcc.Input(id='lab3app-search-term',
-                            value='diet', 
-                            type='text',
-                            style={'width': '80%'},
+                        html.Div(
+                            [
+                                dcc.Input(id='lab3app-search-term',
+                                    value='diet', 
+                                    type='text',
+                                    style={'width': '75%'},
+                                ),
+                            ],
+                            style=dict(display='flex', justifyContent='center'),
+                            className="m-2",
                         ),
-                        html.Br(),
                         html.Div(
                             [
                                 html.Span(
                                     id='lab3app-test-span',
                                 ),
-                            ]
+                                html.Div(
+                                    [
+                                        dcc.Loading(
+                                            [
+                                                html.Div(id="lab3app-loading1-output")
+                                            ],
+                                            id="lab3app-loading1", type="default",
+                                        ),
+                                    ],
+                                    style={'margin': '30px'},
+                                ),                                
+                            ], 
                         ),
                         html.Br(),
                         html.Div(
                             [
-                                dbc.Button("Begin Search", id="lab3app-search", color="default",
-                                    style={'float': 'left', 'display': 'block'}),
+                                dbc.Button("Show", id="lab3app-show", color="default",
+                                    style={'float': 'right', 'display': 'none'}),
                                 dbc.Button("Start Over", id="lab3app-clear", color="default",
-                                    style={'float': 'left', 'display': 'block'}),
+                                    style={'float': 'right', 'display': 'block'}),
+                                dbc.Button("Begin Search", id="lab3app-search", color="default",
+                                    style={'float': 'right', 'display': 'block', "margin-right": "20px"}),
                             ], 
                         ), 
                     ],
@@ -77,59 +97,70 @@ body = dbc.Container(
             ], className="m-4",
         ),
 
-        dbc.Row(
+        html.Div(
             [
-                dbc.Col(html.Div(
+                html.Div(
                     [
-                        html.H6("Trending History"),
-                        html.Img(id='lab3app-trends-img', width='500'),
-                    ],
-                )),
-                dbc.Col(html.Div(
-                    [
-                        html.H6("Rolling Average 52 Weeks"),
-                        html.Img(id='lab3app-rolling-img', width='500'),
-                    ],
-                )),
-            ], className="m-4",
-        ),
+                        dbc.Row(
+                            [
+                                dbc.Col(html.Div(
+                                    [
+                                        html.H6("Trending History"),
+                                        html.Img(id='lab3app-trends-img', width='500'),
+                                    ],
+                                )),
+                                dbc.Col(html.Div(
+                                    [
+                                        html.H6("Rolling Average 52 Weeks"),
+                                        html.Img(id='lab3app-rolling-img', width='500'),
+                                    ],
+                                )),
+                            ], className="m-4",
+                        ),
 
-        dbc.Row(
-            [
-                dbc.Col(html.Div(
-                    [
-                        html.H6("SARIMA Prediction"),
-                        html.Img(id='lab3app-SARIMA-pred-img', width='1000'),
+                        dbc.Row(
+                            [
+                                dbc.Col(
+                                    html.Div(
+                                    [
+                                        html.H6("SARIMA Prediction"),
+                                        html.Img(id='lab3app-SARIMA-pred-img', width='1000'),
+                                    ],
+                                )),    
+                                # html.Div(
+                                #     [
+                                #         html.H6("ARIMA Prediction"),
+                                #         html.Br(),
+                                #         html.Img(id='lab3app-ARIMA-pred-img'),
+                                #         html.Br(),
+                                #     ],
+                                # ),    
+                            ], className="m-4",
+                        ), 
+                        
+                        dbc.Row(
+                            [
+                                dbc.Col(html.Div(
+                                    [
+                                        html.H6("Seasonal Decomposition"),
+                                        html.Img(id='lab3app-decomposition-img', width='500'),
+                                    ],
+                                )),
+                                dbc.Col(html.Div(
+                                    [
+                                        html.H6("SARIMA diagnostics"),
+                                        html.Img(id='lab3app-SARIMA-diag-img', width='500'),
+                                    ],
+                                )),                
+                            ], className="m-4",
+                        ),
                     ],
-                )),    
-                # html.Div(
-                #     [
-                #         html.H6("ARIMA Prediction"),
-                #         html.Br(),
-                #         html.Img(id='lab3app-ARIMA-pred-img'),
-                #         html.Br(),
-                #     ],
-                # ),    
-            ], className="m-4",
-        ), 
-        
-        dbc.Row(
-            [
-                dbc.Col(html.Div(
-                    [
-                        html.H6("Seasonal Decomposition"),
-                        html.Img(id='lab3app-decomposition-img', width='500'),
-                    ],
-                )),
-                dbc.Col(html.Div(
-                    [
-                        html.H6("SARIMA diagnostics"),
-                        html.Img(id='lab3app-SARIMA-diag-img', width='500'),
-                    ],
-                )),                
-            ], className="m-4",
+                ),
+            ],
+            id='lab3app-charts',
+            style={'display': 'none'},
         ),
-
+   
     ], className="mt-4",
 )
 

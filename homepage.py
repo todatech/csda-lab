@@ -48,21 +48,23 @@ body = dbc.Container(
                         ),
                         html.P(
                             """\
-                            For the first part of this lab, we use text mining techniques to determine whether 
-                            a message is a valid one or a spam. In the second part, we determine the sentiment
-                            within the messages that users might hold when they compose these messages.
-                            Both problems fall under classification, but we use two different alogrithms to 
-                            process them, 1.) SVM for spam identification and 2.) LSTM neural networks for 
-                            analyzing sentiment. """
+                            In the first part of this lab, we will be using text mining techniques to determine 
+                            whether a message is a valid one or a spam. Next, we will then determine the sentiment
+                            within the messages itself. Both problems fall under classification, but we use two 
+                            different alogrithms to process them, 1.) SVM for spam identification and 2.) LSTM 
+                            neural networks to analyze sentiment. """
                         ),
                         html.Br(),
                         html.A(
-                            html.H4("Lab 3 - TBD"), 
+                            html.H4("Lab 3 - Time Series Analysis on Keywords from Google Trends"), 
                             href='/lab3'    
                         ),
                         html.P(
                             """\
-                            Description for Lab 3"""
+                            In this lab, we are going to leverage on the real time data from the Google Trends API.
+                            First, we will show you the search frequency of the keywords or phase of your choice. Then,
+                            we will break down the time characteristics of this term into a graphical form that is easy
+                            to digest."""
                         ),
                         html.Br(),
                         html.A(
