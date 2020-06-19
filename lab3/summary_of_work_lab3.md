@@ -1,12 +1,14 @@
-# Summary of Work for Lab 3 - Time Series Analysis on Google Trends Keyword Search
+# Summary of Work for Lab 3 - Time Series Analysis on Google Search Keyword
 
 (old contents from below)
 
 ## Summary
 
-We implemented a spam idenifying engine and sentimenet detection engine in Lab 2. In spam identifying engine, we used text mining techiques to clean up and vectorize text found in SMS message dataset. We used a typical scikit-learn preprocessing package to vectorize text into TF-IDF matrix. Next, we evaluated various classification algorithms and determined that linearSVC was more suitable for this particular dataset, in terms of both the performance and accuracy.
+In this lab, we wish to learn more about the time characteristics of a search term of interest. When you enter a search term on Google, servers will record the time you have tried to search on their website. Over the years, they have collected enormous amount of search data. Through the use of Google's own utility called [Google Trends](https://trends.google.com/trends/?geo=US), users are able to view the interest over time for any search term of your choosing. In addition to time, Google Trend is able to provide geographical locations about where these searches are originated worldwide.
 
-For sentiment analysis system, we picked 200k records from the set of 1.6M twitter messages in which have been labelled with sentiment response. Then, we use gensim preprocessing package to extract topics from a large volume of text, as known as topic modeling. Finally, we fed that data and trained a model to perform sentiment perdiction using Keras/LSTM neural network.
+By leveraging this data, we wish to learn about the time characteristics of any given serach term. We will break it down into different time components and further predict the search frequency over the next year or so. We will be using technique called SARIMA.
+
+Applying regession on the time-series dataset for any given keyword is fairly easy -- it only involves applying SARIMA algorithm in a few lines of code. However, choosing the right P, d, Q parameters in SARIMA/ARIMA(P, d, Q) requires tweaking and human trial and error. Since every keywords has very different time characteristics, for example 'diet' and 'covid' exhibits totally different time-varying behavior. We need a more robust way to tweak those number. But, this is out of the scope of this exercise.
 
 <br />
 
@@ -14,43 +16,41 @@ For sentiment analysis system, we picked 200k records from the set of 1.6M twitt
 
 ---
 
-### Lab 2a - Data Preprecessing and Modeling for SMS Spam Collection Dataset
+### Lab 3 - Data Preprecessing for Google Trends Keyword Search
 
-We have selected [this](https://www.kaggle.com/uciml/notebook) dataset for text mining demonstration. It contains ~5k records that identified a string of text as valid legitimate message or spam.
+Data has been obtained through the use of pytrends package, which connects to Google Trends API web services. Pytrends allows different ways to pull data off from the web services. For our purpose, we just limited ourselves to the "default settings" -- we will let the API to provide us with default region and time frame, which is in the North America region and we will be looking at the 5 most recent years of data. 
 
-We completed some data preprocessing tasks and performed simple data explorations using this dataset, which can be found [here](lab2/spam_identifier.ipynb).
+Data is determined to be in a very clean state. The only work required was to properly realigning the data and dropping some columns that are not needed. The API provide us weekly data points and we think that this is a good compromise between visibility and computation time. 
 
-Then, we used the clean data to perform feature extraction on the string of text we found in the message body. In order to tokenize and vectorize the string of text, we  used preprocessing package from within scikit-learn, called TfidfVectorizer(), to generate a vectorized matrix model.
+We further dig into how we should approach dissecting information from the time series. Since most search term has seasonal effects in it, we wish to focus more on both the trends and seasonality behind these. We believe that most terms do not have much noise associated with it. Nonetheless, it is unlike stock market time-series data in which there are a lot of external factors affecting prices on daily basis. We would expect searches do not have this kind of external behaviors that give rise to noise.
 
-Following this process, we started to build machine-learning model around this dataset/matrix. We ran a few ML models as suggested by [scikit-learn cheat sheet](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html). The rationale behind selecting one algorithm over the other can be found in the lab2a notebook.
+When we are modeling p, d , q parameters of both ARIMA and SARIMA, we took those consideration in mind.
 
-Finally, we selected linearSVC estimator for our spam engine because it gave better accuracy of 0.985 and only takes few milliseconds to compute, while some of the model take up as much as a minute to compute.
+Most terms we tried has an trend associated with it. Depending on whether it is a news topic i.e. Covid-19 or dieting or Justin Bieber, we will see very different trending line associated with such topics. Since the data points are on weekly basis, we used rolling window  of 52 weeks -- a time period of a year to see if there is any upward or downward trend.
 
-[Lab 2a: Text Mining - SMS Spam Collection](lab2/spam_identifier.ipynb)
+We also provide a autocorrelation and partial autocorrelation graphs in Juypter Notebook, and most search term exhibit certain repeating pattern in autocorrelation, but not much apparent patterns in partial autocorrelation.
 
-[SMS Spam Collection Dataset](https://www.kaggle.com/uciml/notebook)
+There are much more information in a seasonal_decomposition graph, and we are able to pick up more pattern with any given time-series graph, using Statsmodels package (sm.tsa.seasonal_decompose).
 
-### Lab 2b - Data Preprecessing and Modeling for Sentiment Analysis System
+[Lab 3: Juypter Notebook Time-Series Analysis on Google Search Keyword](time_series.ipynb)
 
-For deep learning part of the exercise, we selected the twitter sentiment dataset for this demonstration. This dataset can be found [here](http://help.sentiment140.com/for-students/).
+### Lab 3 -- Data Modeling using SARIMA
 
-We went through the same process as lab2a. We carried out data preprocessing, feature extraction, and modeling for this second part of the lab. Instead of using the "traditional" scikit-learn library, we followed the example from [Paolo Ripamonti](https://www.kaggle.com/paoloripamonti) and built a sentiment engine using Gensim/Keras.
+ARIMA basically consists of 3 models combine into one. AR (autoregressive), I (integrate), MA (Moving-Average) and we can selectively use any or all models at once using parameters specified to ARIMA(P, d, Q).
 
-Gensim is a Topic Modeling Engine for processing text and for word vector generation. Keras, on the other hand, is a wrapper for the underlying tensorflow neural network engine. In Paolo's example, he used LSTM as the underlying neural networking model for sentiment detection. We borrowed his example and implemented a python engine for our dash app. However, for our application, we tuned down the model by tweaking down some of the paramters, as well as downsizing the dataset in order to minimize the model generation time from 8+ hours down to 10 mins. Nonetheless, this model still give a respectable 0.78 accuracy even though we slashed the model heavily.
+SARIMA has Seasonal part that breaks up ARIMA further into two components (Trends, Seasonal). In our juypter notebook, we have run a few sample keywords with SARIMA and it turn out good result. Furthermore, we feed this to a grid search and try to locate combinations of SARIMA parameters (6 in totals). We settle with one set of parameters for all cases of all keywords. This is also one of the limitation for this app, because we cannot optimize these parameters on the fly for individual keywords. It took about 30 mins to find an optimal parameters in grid search, and thus it is not ideal for web app where users wish to have a quick response.
 
-We also modified some functions for our Dash app. Our data exploration work can be found [here](lab2/twitter_sentiment_data_explore.ipynb). And, our LSTM modeling work can be found [here](lab2/twitter_sentiment_lstm.ipynb).
+[Lab 3: Juypter Notebook Time-Series Analysis on Google Search Keyword](time_series.ipynb)
 
-[Lab 2b: Deep Learning Model (Part 1): Twitter Sentiment Analysis - Data cleaning and Data exploration](lab2/twitter_sentiment_data_explore.ipynb)
+[Kaggle: Everything you can do with a time series by Siddharth Yadav](https://www.kaggle.com/thebrownviking20/everything-you-can-do-with-a-time-series#3.-Time-series-decomposition-and-Random-walks)
 
-[Lab 2b: Deep Learning Model (Part 2): Twitter Sentiment Analysis - Neural Network Modeling LSTM | Keras](lab2/twitter_sentiment_lstm.ipynb)
+[Machine Learning Mastery: How to Create an ARIMA Model for Time Series Forecasting in Python by Jason Brownlee](https://machinelearningmastery.com/arima-for-time-series-forecasting-with-python/)
 
-[Sentiment140](http://help.sentiment140.com/home)
+[Machine Learning Plus: Time Series Analysis in Python – A Comprehensive Guide with Examples by Selva Prabhakaran](https://www.machinelearningplus.com/time-series/time-series-analysis-python/)
 
-[Twitter Sentiment Analysis by Paolo Ripamonti](https://www.kaggle.com/paoloripamonti/twitter-sentiment-analysis)
+[Toward Data Science: An End-to-End Project on Time Series Analysis and Forecasting with Python by Susan Li](https://towardsdatascience.com/an-end-to-end-project-on-time-series-analysis-and-forecasting-with-python-4835e6bf050b)
 
-[Gensim - topic modelling for humans](https://radimrehurek.com/gensim/)
-
-[Keras - Deep Learning API](https://keras.io/)
+[Data Camp: Time Series Analysis Tutorial with Python by Hugo Bowne-Anderson](https://www.datacamp.com/community/tutorials/time-series-analysis-tutorial)
 
 <br />
 
@@ -60,19 +60,11 @@ We also modified some functions for our Dash app. Our data exploration work can 
 
 ### Lab 2a - Spam Identifier
 
-This module contains library of Spam Identifier Class. After the spam identifying engine is up and running, it is able to predict whether a string of text is a spam or not.
+This module contains library of KeywordOverTimeTrends Class. Please refere to the usage on the juypter notebook sample
 
-[Lab 2a Spam Identifier Engine Class](lab2/spammer.py)
+[Lab 3 kottrends.py - KeywordOverTimeTrends Module Class](kottrends.py)
 
-[Lab 2a Spam Identifier Engine Class Test Notebook](lab2/spammer_class_test.ipynb)
-
-### Lab 2b - Sentiment Analyzer
-
-This module contains library of Sentiment Analyzing Class. When the engine is up and running, it is able to detect sentiment within a text string, whether it is a POSITIVE mesage, NEGATIVE, or NEUTRAL.
-
-[Lab 2b Sentiment Analyzing Engine Class](lab2/sentiment.py)
-
-[Lab 2b Sentiment Analyzing Engine Class Test Notebook](lab2/sentiment_class_test.ipynb)
+[Lab 3 kottrends_class_test.ipynb - KeywordOverTimeTrends Module Class Test Notebook](kottrends_class_test.ipynb)
 
 <br />
 
@@ -80,6 +72,10 @@ This module contains library of Sentiment Analyzing Class. When the engine is up
 
 ---
 
-Demonstration of both engines can be found in the dash app lab 2 section. For docker and deployment, please refer to lab1 summary of work, under the same section.
+Demonstration can be found in the dash app lab 3 section. For docker and deployment, please refer to lab1 summary of work, under the same section. Main part of the lab3 app is located in the root of the project called lab3app.py
 
-[Lab1 Summary of work](lab1/summary_of_work_lab1.md)
+[Lab1 Summary of work](../lab1/summary_of_work_lab1.md)
+
+[Lab 3 Dash App](../lab3app.py)
+
+[This File](summary_of_work_lab3.md)
