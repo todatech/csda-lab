@@ -1,6 +1,6 @@
 # CSDA1040: Advanced Methods of Data Analysis
 
-# Lab 2 - Time Series
+# Lab 3 - Time Series
 
 Submitted By Group 8
 
@@ -14,4 +14,4 @@ Cristina Endara (ID: 217625567)
 
 Sangeeta Khanna (ID: 217638719)
 
-Date of Submission: June 8, 2020
+Date of Submission: June 22, 2020
