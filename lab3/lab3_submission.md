@@ -1,8 +1,6 @@
-# Lab 3 Submission
+# CSDA1040: Advanced Methods of Data Analysis
 
-CSDA1040: Advanced Methods of Data Analysis
-
-Lab 2 - Time Series
+# Lab 2 - Time Series
 
 Submitted By Group 8
 
