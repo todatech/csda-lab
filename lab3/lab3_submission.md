@@ -95,5 +95,5 @@ SARIMA has a seasonal part that breaks up ARIMA further into two components (Tre
 
 ## Deployment
 
-We deployed application at 
+We deployed application at http://dash.todatech.ca:8050/lab3
 
