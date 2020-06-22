@@ -44,22 +44,27 @@ We further dig into how we should approach dissecting information from the time 
 
 Most terms we tried have a trend associated with them. Depending on whether it is a news topic i.e. "Covid-19" or "diet" or "Justin Bieber", we see very different trending lines associated. Since the data points are on weekly basis, we used a window of 52 weeks - time period of a year - to see if there there are any upward or downward trends. For example, for the word "diet", there are more searches at the beginning of the year, most likely in line with New Year's resolutions and in prepation for summer vacations (see graph below).
 
+"Diet" search trend.
 !["Diet" search trend.](src/pic31.png)
 
 Using a 52-week rolling average, we also see a gradual increase from 2017 to 2019 and a significant decline after 2019.
 
+"Diet" 52-week rolling average.
 !["Diet" 52-week rolling average.](src/pic32.png)
 
 When we looked at autocorrelation and partial autocorrelation, most search terms exhibit certain repeating pattern in autocorrelation (measures how much a series is correlated with itself at different lags) but not much apparent patterns in partial autocorrelation (can be interpreted as a regression of the series against its past lags).
 
 For example, for the word "diet", we see there is autocorrelation in every 52 weeks (see graphs below).
 
+"Diet" autocorrelation.
 !["Diet" autocorrelation.](src/pic33.png)
 
+"Diet" partial autocorrelation.
 !["Diet" partial autocorrelation.](src/pic34.png)
 
 Using Statsmodels package, the seasonal decomposition graph below allows to see further patterns of the "diet" time series.
 
+"Diet" seasonal decomposition.
 !["Diet" seasonal decomposition.](src/pic35.png)
 
 
@@ -69,8 +74,9 @@ ARIMA consists of 3 models combined into one. AR (autoregressive), I (integrate)
 
 SARIMA has a seasonal part that breaks up ARIMA further into two components (Trends, Seasonal). In our juypter notebook, we have run a few sample keywords with SARIMA and it turn out good result. Furthermore, we fed this to a grid search and try to locate combinations of SARIMA parameters (6 in total). We settled with one set of parameters for all cases of all keywords (see graphs below). This is also one of the limitation for this app, because we cannot optimize these parameters on the fly for individual keywords. It took about 30 mins to find an optimal parameters in grid search, and thus it is not ideal for web app where users wish to have a quick response.
 
+"Diet" SARIMA Model.
 !["Diet" SARIMA Model.](src/pic36.png)
 
-
-["Diet" SARIMA Time-Series Forecast.](src/pic37.png)
+"Diet" SARIMA Time-Series Forecast.
+!["Diet" SARIMA Time-Series Forecast.](src/pic37.png)
 
