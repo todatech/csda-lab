@@ -88,6 +88,11 @@ SARIMA has a seasonal part that breaks up ARIMA further into two components (Tre
 
 !["Diet" SARIMA Time-Series Forecast.](src/pic37.png)
 
+
+## Conclusion
+
+
+
 ## Deployment
 
 We deployed application at 
