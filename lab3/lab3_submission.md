@@ -88,6 +88,10 @@ SARIMA has a seasonal part that breaks up ARIMA further into two components (Tre
 
 !["Diet" SARIMA Time-Series Forecast.](src/pic37.png)
 
+ARIMA predtiction
+
+We tried the same model using Arima (without seasonal parameters)
+
 
 ## Conclusion
 
