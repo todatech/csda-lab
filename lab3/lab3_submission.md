@@ -2,7 +2,7 @@
 
 ## Lab 3 - Time Series Analysis
 
-### Disecting Time Characteristics in a Google Search Term | SARIMA modeling
+### Dissecting Time Characteristics in a Google Search Term | SARIMA modeling
 
 Submitted By Group 8
 
