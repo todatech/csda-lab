@@ -99,7 +99,7 @@ We tried the same model using Arima (without seasonal parameters)
 !["Diet" ARIMA Time-Series Forecast.](src/pic228.PNG)
 
 ## Conclusion
-In Lab 3 we worked on e making an app which will do the analysis on the time characteristics of a google search term. We have used  Google Trends API to obtain "interest over time()" for a keyword of interest, and we also manage to extract time series characteristics of this term and determine whether this search has upword/downword trend, and seasonality of this keyword. Finally,our app is showing forecast on the trend in the future.for eg we We searched on Diet keyword in our Analysis and showed analysis and found autocorrectional is done after every 52 weeks.
+In Lab 3 we worked on making an app which will do the analysis on the time characteristics of a google search term. We have used  Google Trends API to obtain "interest over time()" for a keyword of interest, and we also manage to extract time series characteristics of this term and determine whether this search has upword/downword trend, and seasonality of this keyword. Finally, our app can predict the search frequency over the next year and forecast on the trend in the future. For example We searched on Diet keyword in our Analysis and showed analysis and found autocorrectional is done after every 52 weeks. 
 
 
 
