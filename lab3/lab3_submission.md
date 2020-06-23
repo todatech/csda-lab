@@ -92,7 +92,7 @@ ARIMA predtiction
 
 We tried the same model using Arima (without seasonal parameters)
 
-!["Diet" ARIMA Time-Series Forecast.](src/pic 26.png)
+!["Diet" ARIMA Time-Series Forecast.](src/pic 26.svg)
 
 ## Conclusion
 
