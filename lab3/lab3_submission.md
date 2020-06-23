@@ -94,6 +94,8 @@ We tried the same model using Arima (without seasonal parameters)
 
 !["Diet" ARIMA Time-Series Forecast.](src/pic266.PNG)
 
+!["Diet" ARIMA Time-Series Forecast.](src/pic226.PNG)
+
 !["Diet" ARIMA Time-Series Forecast.](src/pic27.PNG)
 
 !["Diet" ARIMA Time-Series Forecast.](src/pic28.PNG)
